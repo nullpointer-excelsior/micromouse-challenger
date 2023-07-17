@@ -1,7 +1,5 @@
-import React from 'react';
 import './Maze.css'
-import { Cell, MouseMaze } from '../../../../core/micromouse/domain';
-import { useMazeState } from '../state/maze.state';
+import { useMazeState } from '../../state/maze.state';
 
 
 const Maze = () => {

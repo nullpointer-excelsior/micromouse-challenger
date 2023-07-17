@@ -15,6 +15,10 @@ export class MicroMouse {
         return response
     }
 
+    getFlag(): string {
+        return this.mouse.getFlag()
+    }
+
     getCurrentPosition(): string {
         return this.mouse.getCurrentPosition()
     }

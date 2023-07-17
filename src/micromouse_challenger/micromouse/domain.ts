@@ -14,21 +14,26 @@ export class InvalidCellNameException extends Error {
     }
 }
 
-export class Cell {
-    position: string;
-    type: string;
-
-    constructor(position: string, type: string) {
-        this.position = position;
-        this.type = type;
+export class FlagNotFoundException extends Error { 
+    constructor(message: string) {
+        super(message)
+        this.name ='FlagNotFoundException'
     }
+}
+
+export class Cell {
+
+    constructor(
+        public readonly position: string, 
+        public readonly type: string
+    ) { }
 
     canWalk(): boolean {
-        return this.type === ' ';
+        return this.type === ' ' || this.type === 'S';
     }
 
     isExit(): boolean {
-        return this.type === '🏆';
+        return this.type === 'S';
     }
 }
 
@@ -53,7 +58,6 @@ export class CellPosition {
         if (!Object.keys(cells).includes(position)) {
             throw new InvalidCellNameException(`Invalid cell position: ${position}. options: (${Object.keys(cells).join(',')})`);
         }
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return cells[position];
     }
 
@@ -62,9 +66,14 @@ export class CellPosition {
     }
 }
 
+interface MouseMazeProps {
+    flag: string;
+    matrix: string[][];
+}
+
 export class MouseMaze {
 
-    constructor(public readonly maze: Cell[][]) { }
+    constructor(public readonly flag: string, public readonly maze: Cell[][]) { }
 
     private findIndexes(valor: string): [number, number] | null {
         for (let i = 0; i < this.maze.length; i++) {
@@ -113,18 +122,19 @@ export class MouseMaze {
         );
     }
 
-    static fromMatriz(maze: string[][]): MouseMaze {
+    static create(props: MouseMazeProps): MouseMaze {
+        const {matrix, flag} = props
         const matrixCells: Cell[][] = [];
-        for (let i = 0; i < maze.length; i++) {
+        for (let i = 0; i < matrix.length; i++) {
             const row: Cell[] = [];
-            for (let j = 0; j < maze[i].length; j++) {
+            for (let j = 0; j < matrix[i].length; j++) {
                 const position = String.fromCharCode('A'.charCodeAt(0) + i) + String(j);
-                const cell = new Cell(position, maze[i][j]);
+                const cell = new Cell(position, matrix[i][j]);
                 row.push(cell);
             }
             matrixCells.push(row);
         }
-        return new MouseMaze(matrixCells);
+        return new MouseMaze(flag, matrixCells);
     }
 }
 
@@ -191,6 +201,13 @@ export class Mouse {
         );
     }
 
+    getFlag() {
+        if (this.getCurrentCell().isExit()) {
+            return this.maze.flag
+        }
+        throw new FlagNotFoundException(`Flag no encontrada en posicion actual ${this.getCurrentPosition()}`)
+    }
+
     getCurrentPosition(): string {
         return this.currentPosition.getCurrentPosition();
     }
@@ -199,19 +216,19 @@ export class Mouse {
         return this.currentPosition.value;
     }
 
-    getUpCell(): Cell | null {
+    getUpCell(): Cell {
         return this.currentPosition.up;
     }
 
-    getDownCell(): Cell | null {
+    getDownCell(): Cell {
         return this.currentPosition.down;
     }
 
-    getLeftCell(): Cell | null {
+    getLeftCell(): Cell {
         return this.currentPosition.left;
     }
 
-    getRightCell(): Cell | null {
+    getRightCell(): Cell {
         return this.currentPosition.right;
     }
 

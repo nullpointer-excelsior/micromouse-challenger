@@ -1,21 +1,25 @@
 import './App.css'
-import { Mouse, MouseMaze } from './core/micromouse/domain'
-import { MicroMouse } from './core/micromouse/application'
-import { useMazeState } from './ui/pages/micromouse/state/maze.state'
-import { eventbus } from './core/utils/infraestructure'
-import { Event } from './core/utils/eventbus'
-import Challenger from './ui/pages/micromouse/components/Challenger'
+import { Mouse, MouseMaze } from './micromouse_challenger/micromouse/domain'
+import { MicroMouse } from './micromouse_challenger/micromouse/application'
+import { useMazeState } from './micromouse_challenger/micromouse/infraestructure/ui/state/maze.state'
+import { eventbus } from './micromouse_challenger/utils/infraestructure'
+import { Event } from './micromouse_challenger/utils/eventbus'
+import Challenger from './micromouse_challenger/micromouse/infraestructure/ui/components/challenger/Challenger'
 import { useEffect } from 'react'
+import MicroMousePage from './micromouse_challenger/ui/pages/MicromousePage'
 
 function App() {
-  console.log("Render!!!!")
-  const maze = MouseMaze.fromMatriz([
+  
+  const maze = MouseMaze.create({
+    flag: "Ggteudkdskpwoeo",
+    matrix: [
       [' ', 'X', 'X', 'X', 'X'], 
       [' ', 'X', ' ', ' ', ' '],
       [' ', 'X', ' ', 'X', ' '], 
       [' ', ' ', ' ', 'X', ' '], 
       ['X', 'X', 'X', 'X', 'S'] 
-  ])
+    ]
+  })
 
   const mouse = new Mouse(maze, maze.getPosition('A0'))
   const micromouse = new MicroMouse(mouse, eventbus)
@@ -24,10 +28,17 @@ function App() {
   const updateMousePosition = useMazeState(state=> state.updateMousePosition)
   
   const subscription = eventbus.subscribe('micromouse.mouse-move', (event: Event<any>) => {
-    console.log(event.payload)
     updateMousePosition(event.payload.position)
     updateMessage(event.payload.message)
   })
+  
+  eventbus.subscribe('micromouse.mouse-move', (event: Event<any>) => {
+    console.log(event.payload)
+    if (event.payload.isMoved && micromouse.getCurrentCell().isExit()) {
+      alert("Congratulations!! ")
+    }
+  })
+  
 
   useEffect(() => {
     return () => subscription.unsubscribe()
@@ -36,11 +47,9 @@ function App() {
 
   return (
     <>
-      <h1>Micromouse challenger</h1>
-      <div>
+      <MicroMousePage>
         <Challenger micromouse={micromouse} ></Challenger>
-      </div>
-       
+      </MicroMousePage>
     </>
   )
 }

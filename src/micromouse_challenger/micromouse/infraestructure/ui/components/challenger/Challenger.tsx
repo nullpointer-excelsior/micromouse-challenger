@@ -1,7 +1,7 @@
 import { useState } from "react"
-import Maze from "./Maze"
-import { MicroMouse } from "../../../../core/micromouse/application"
-import { useMazeState } from "../state/maze.state"
+import Maze from "../maze/Maze"
+import { MicroMouse } from "../../../../application"
+import { useMazeState } from "../../state/maze.state"
 
 export default function Challenger(props: { micromouse: MicroMouse}) {
     

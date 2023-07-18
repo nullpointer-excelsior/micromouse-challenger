@@ -1,17 +1,18 @@
 import './Maze.css'
 import { useMazeState } from '../../state/maze.state';
+import { MouseMaze } from '../../../../domain';
 
 
-const Maze = () => {
+export default function Maze() {
  
-
-    const { maze, mousePosition } = useMazeState()
-
+    const { mousePosition, maze } = useMazeState()
+    const cells = MouseMaze.mapMatrixToCells(maze)
+    
     return (
         <div className="tablero">
-          {maze.map((fila, filaIndex) => (
+          {cells.map((row, filaIndex) => (
             <div key={filaIndex} className="fila">
-              {fila.map((celda, celdaIndex) => (
+              {row.map((celda, celdaIndex) => (
                 <div key={celdaIndex} className={`celda ${celda.type}`}>
                     {mousePosition === celda.position? '🐭' : ''}
                 </div>
@@ -22,5 +23,3 @@ const Maze = () => {
       );
 
 }
-
-export default Maze;

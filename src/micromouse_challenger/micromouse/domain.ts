@@ -136,6 +136,20 @@ export class MouseMaze {
         }
         return new MouseMaze(flag, matrixCells);
     }
+
+    static mapMatrixToCells(matrix: string[][]): Cell[][] {
+        const matrixCells: Cell[][] = [];
+        for (let i = 0; i < matrix.length; i++) {
+            const row: Cell[] = [];
+            for (let j = 0; j < matrix[i].length; j++) {
+                const position = String.fromCharCode('A'.charCodeAt(0) + i) + String(j);
+                const cell = new Cell(position, matrix[i][j]);
+                row.push(cell);
+            }
+            matrixCells.push(row);
+        }
+        return matrixCells
+    }
 }
 
 export class MoveMouseResponse {

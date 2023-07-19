@@ -10,17 +10,23 @@ export interface ScoreState {
    endTime: Date;
    setStartTime: () => void;
    setEndTime: () => void;
+   reset: () => void;
+}
+
+const defaultState = {
+   id: null,
+   movements: 0,
+   time: "00:00",
+   startTime: null,
+   endTime: null,
 }
 
 export const useScoreState = create<ScoreState>((set) => ({
-   id: null,
-   movements: 0,
+   ...defaultState,
    incrementMovements: () => set((state) => ({ movements: state.movements + 1})),
-   time: "00:00",
    setTime: (time: string) => set({ time }),
-   startTime: null,
-   endTime: null,
    setStartTime: () => set({ startTime: new Date()}),
    setEndTime: () => set({ endTime: new Date()}),
+   reset: () => set({ ...defaultState })
 }))
 

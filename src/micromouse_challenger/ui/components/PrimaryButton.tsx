@@ -5,7 +5,7 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 export default function PrimaryButton({ text, className, ...rest }: ButtonProps) {
-  const styles = "bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded " + className
+  const styles = "bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded shadow-lg " + className
   return (
     <button className={styles} {...rest}>
       {text}

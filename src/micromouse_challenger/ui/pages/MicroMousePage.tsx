@@ -2,10 +2,21 @@ import { useMazeState } from "../../micromouse/infrastructure/ui/state/maze.stat
 import Maze from "../../micromouse/infrastructure/ui/components/maze/Maze"
 import MicroMouseControl from "../../micromouse/infrastructure/ui/components/micromouse-control/MicroMouseControl"
 import ScoreDashboard from "../../score/infrastructure/ui/components/score-dashboard/ScoreDashboard"
+import PrimaryButton from "../components/PrimaryButton"
+import { useLocation } from "wouter"
+import { useScoreState } from "../../score/infrastructure/ui/state/score.state"
 
 export default function MicroMousePage() {
 
-  const { message } = useMazeState()
+  const { message, reset: resetMazeState } = useMazeState()
+  const { reset: resetScoreState } = useScoreState()
+  const [,navigate] = useLocation();
+
+  const onCLick = () => {
+    resetScoreState()
+    resetMazeState()
+    navigate("/")
+  }
   
   return (
       <>
@@ -19,7 +30,7 @@ export default function MicroMousePage() {
             <MicroMouseControl />
           </div>
         </div>
-        
+        <PrimaryButton onClick={onCLick} className="w-80 my-8" text="NUEVO JUEGO"/>
       </>
   )
 }

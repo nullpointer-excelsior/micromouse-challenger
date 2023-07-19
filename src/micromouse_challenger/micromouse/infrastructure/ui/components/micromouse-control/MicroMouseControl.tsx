@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { eventbus } from "../../../../../utils/infrastructure";
 import { micromouse } from "../../../../application";
 import { useMazeState } from "../../state/maze.state";

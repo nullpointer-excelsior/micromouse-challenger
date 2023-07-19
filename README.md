@@ -23,7 +23,7 @@ npm run dev
     * piedras
 - [ ] obtener y enviar flag
 - [x] tomar tiempo
-- [ ] generacion de laberintos complejos
+- [x] generacion de laberintos complejos
 - [x] ordenar directorios y archivos
 - [ ] ejemplo de algoritmo basico para la resolucion del laberinto
 - [ ] documentar APIs basicas Mouse, MouseResponses

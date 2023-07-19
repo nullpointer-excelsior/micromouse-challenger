@@ -5,9 +5,9 @@ import { MouseMaze } from '../../../../domain';
 
 export default function Maze() {
  
-    const { mousePosition, maze } = useMazeState()
+    const { mousePosition, maze, flag } = useMazeState()
     const cells = MouseMaze.mapMatrixToCells(maze)
-    
+
     return (
         <div className="tablero">
           {cells.map((row, filaIndex) => (

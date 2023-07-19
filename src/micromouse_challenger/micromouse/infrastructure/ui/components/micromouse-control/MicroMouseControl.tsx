@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { eventbus } from "../../../../../utils/infrastructure";
 import { micromouse } from "../../../../application";
 import { useMazeState } from "../../state/maze.state";
@@ -9,11 +9,15 @@ import { MouseMoveEvent } from "../../../../domain";
 
 export default function MicroMouseControl() {
     console.log('Component: MicroMouseControl()')
-    const { mousePosition, updateMessage, updateMousePosition } = useMazeState()
+    const { mousePosition, updateMessage, updateMousePosition, flag, maze } = useMazeState()
     const { incrementMovements } = useScoreState()
     const [startTime, setStartTime] = useState<Date>(null)
     const [endTime, setEndTime] = useState<Date>(null)
     const stopwatch = useStopwatch({ startTime, endTime })
+
+    useEffect(() => {
+        micromouse.startChallenger({ flag, matrix: maze })
+    }, [])
 
     useObservable(eventbus.onEvent<MouseMoveEvent>('micromouse.mouse-move'), (event: MouseMoveEvent) => {
         console.log(`event: ${event.payload.position}, mousePosition: ${mousePosition}, micromouse ${micromouse.getCurrentPosition()}`)
@@ -36,6 +40,10 @@ export default function MicroMouseControl() {
     const onClickDown = () => micromouse.move('down')
     const onClickLeft = () => micromouse.move('left')
     const onClickRight = () => micromouse.move('right')
+
+    if (!micromouse.ready) {
+        return <p>Esperando iniciar juego...</p>
+    }
 
     return (
         <div onClick={onClickControls}>

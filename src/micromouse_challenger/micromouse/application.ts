@@ -1,10 +1,13 @@
-import { Cell, Mouse, MouseMaze, MouseMoveEvent, MoveMouseResponse } from "./domain";
+import { Cell, Mouse, MouseMaze, MouseMazeProps, MouseMoveEvent, MoveMouseResponse } from "./domain";
 import { EventBus } from "../utils/eventbus";
 import { eventbus } from "../utils/infrastructure";
 
 export class MicroMouse {
 
-    constructor(private readonly mouse: Mouse, private readonly eventbus: EventBus<any>) { }
+    ready = false
+    private mouse: Mouse
+
+    constructor(private readonly eventbus: EventBus) { }
 
     move(position: 'up' | 'down' | 'left' | 'right'): MoveMouseResponse {
         const response = this.mouse.move(position)
@@ -14,6 +17,12 @@ export class MicroMouse {
             position: response.cellPosition.getCurrentPosition()
         }))
         return response
+    }
+
+    startChallenger(options: MouseMazeProps) {
+        const maze = MouseMaze.create(options)
+        this.mouse = new Mouse(maze, maze.getPosition('A0'))
+        this.ready = true
     }
 
     getFlag(): string {
@@ -46,15 +55,4 @@ export class MicroMouse {
 
 }
 
-const mousemaze = MouseMaze.create({
-    flag: "flag",
-    matrix: [
-        [' ', 'X', 'X', 'X', 'X'],
-        [' ', 'X', ' ', ' ', ' '],
-        [' ', 'X', ' ', 'X', ' '],
-        [' ', ' ', ' ', 'X', ' '],
-        ['X', 'X', 'X', 'X', 'S']
-    ]
-})
-const mouse = new Mouse(mousemaze, mousemaze.getPosition('A0'))
-export const micromouse = new MicroMouse(mouse, eventbus)
+export const micromouse = new MicroMouse(eventbus)

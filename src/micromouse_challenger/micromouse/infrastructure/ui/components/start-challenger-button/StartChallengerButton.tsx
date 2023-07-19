@@ -6,7 +6,7 @@ export default function StartChallengerButton(props: { matrix: string[][], flag:
     const [,navigate] = useLocation();
     const  initMaze = useMazeState(state => state.initMaze)
 
-    const onClickButton = (e) => {
+    const onClickButton = () => {
         initMaze(flag, matrix)
         navigate("/micromouse/challenger")
     }

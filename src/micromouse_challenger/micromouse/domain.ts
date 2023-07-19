@@ -66,7 +66,7 @@ export class CellPosition {
     }
 }
 
-interface MouseMazeProps {
+export interface MouseMazeProps {
     flag: string;
     matrix: string[][];
 }

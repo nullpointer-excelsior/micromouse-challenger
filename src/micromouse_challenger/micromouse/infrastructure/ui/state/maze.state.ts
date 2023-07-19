@@ -13,7 +13,7 @@ export interface MazeState {
 export const useMazeState = create<MazeState>((set) => ({
     message: "Micromouse challenger iniciando 🏆 <- 🐁",
     mousePosition: 'A0',
-    flag: "no-flag",
+    flag: null,
     maze: [
         [' ', 'X', 'X', 'X', 'X'],
         [' ', 'X', ' ', ' ', ' '],

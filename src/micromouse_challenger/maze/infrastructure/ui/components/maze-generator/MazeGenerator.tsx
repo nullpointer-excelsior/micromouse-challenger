@@ -5,7 +5,7 @@ import { useMazeGeneratorState } from "../../state/maze-generator.state"
 
 export default function MazeGenerator() {
 
-    const { flag, matrix, updateMaze } = useMazeGeneratorState()
+    const { matrix, updateMaze } = useMazeGeneratorState()
     
     const onClicGenerate = (e) => {
         mazeGenerator
@@ -18,7 +18,6 @@ export default function MazeGenerator() {
 
     return (
         <>
-            <p>{flag}</p>
             <MazeView maze={matrix} />
             <div>
                 <button onClick={onClicGenerate}>GENERAR</button>

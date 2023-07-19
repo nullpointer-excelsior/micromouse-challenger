@@ -209,7 +209,7 @@ export class Mouse {
         this.currentPosition = cellPosition;
 
         return new MoveMouseResponse(
-            `Me he movido 🐁 -> (${cellPosition.getCurrentPosition()})`,
+            `Me he movido 🐁 -> (${this.currentPosition.getCurrentPosition()})`,
             cellPosition,
             true
         );

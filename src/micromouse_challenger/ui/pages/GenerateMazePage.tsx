@@ -9,13 +9,11 @@ export default function GenerateMazePage() {
 
     return (
         <>
-            <h2>Generar laberinto</h2>
-            <p>Genera el laberinto que quieres desafiar y comienza el desafio</p>
+            <p className="m-8 text-orange-300 text-lg">Genera el laberinto que quieres desafiar y comienza el desafio</p>
             <MazeGenerator />
             { 
             matrix ? <StartChallengerButton matrix={matrix} flag={flag} />: null
             }
-            
         </>
     )
 }

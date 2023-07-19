@@ -32,6 +32,7 @@ npm run dev
 - [x] generar web del juego en React u otro parecido
 - [ ] tyoescript playgrond para programar el ratoncito
 - [x] tailwindcss para los estilos
+- [x] usar el teclado para moverse
 
 
 **Desarrollador:** Benjamín 

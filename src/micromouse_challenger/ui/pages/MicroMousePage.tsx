@@ -30,7 +30,7 @@ export default function MicroMousePage() {
             <MicroMouseControl />
           </div>
         </div>
-        <PrimaryButton onClick={onCLick} className="w-80 my-8" text="NUEVO JUEGO"/>
+        <PrimaryButton onClick={onCLick} className="w-80 my-8" text="VOLVER"/>
       </>
   )
 }

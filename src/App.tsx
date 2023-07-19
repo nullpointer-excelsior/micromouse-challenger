@@ -1,4 +1,3 @@
-import './App.css'
 import Home from './micromouse_challenger/ui/Home'
 import Routing from './micromouse_challenger/ui/router/Routing'
 

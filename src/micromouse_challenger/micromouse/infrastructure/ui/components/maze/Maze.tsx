@@ -1,22 +1,29 @@
-import './Maze.css'
 import { useMazeState } from '../../state/maze.state';
 import { MouseMaze } from '../../../../domain';
+import CellContent from './CellContent';
 
+function Cell({cell, mousePosition }) {
+  const colors = {
+    'X': 'bg-red-900',
+    // 'S': 'bg-green-700',
+  };
+  return (
+    <div className={`w-4 h-4 flex justify-center items-center ${colors[cell.type] || ''}`}>
+      <CellContent mousePosition={mousePosition} cell={cell}/>
+    </div>
+  )
+}
 
 export default function Maze() {
  
-    const { mousePosition, maze, flag } = useMazeState()
+    const { mousePosition, maze } = useMazeState()
     const cells = MouseMaze.mapMatrixToCells(maze)
 
     return (
-        <div className="tablero">
+        <div className="flex flex-col items-center border-slate-500 border-8 rounded">
           {cells.map((row, filaIndex) => (
-            <div key={filaIndex} className="fila">
-              {row.map((celda, celdaIndex) => (
-                <div key={celdaIndex} className={`celda ${celda.type}`}>
-                    {mousePosition === celda.position? '🐭' : ''}
-                </div>
-              ))}
+            <div key={filaIndex} className="flex bg-violet-400">
+              {row.map((cell, cellIdx) => <Cell key={cellIdx} cell={cell} mousePosition={mousePosition}/>)}
             </div>
           ))}
         </div>

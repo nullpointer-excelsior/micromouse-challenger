@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useScoreState } from "../../state/score.state";
 
 type Props = {
     startTime: Date;
@@ -10,23 +11,21 @@ export interface Stopwatch {
     totalSeconds: number;
 }
 
-function calculateStopwacth(minutes: number, seconds: number):  Stopwatch{
-    return {
-        time: `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`,
-        totalSeconds: minutes === 0 ? seconds : ((minutes * 60) + seconds)
-    }
+function calculateStopwacth(minutes: number, seconds: number) {
+  return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+    // return {
+    //     time: `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`,
+    //     totalSeconds: minutes === 0 ? seconds : ((minutes * 60) + seconds)
+    // }
 }
 
-export default function useStopwatch({ startTime, endTime}: Props): Stopwatch {
+export default function useStopwatch() {
     const [minutes, setMinutes] = useState(0);
     const [seconds, setSeconds] = useState(0);
-    const [stopwatch, setStopwatch] = useState<Stopwatch>({
-        time: "00:00",
-        totalSeconds: 0
-    })
+    const { time, endTime, startTime ,setTime, setEndTime, setStartTime } = useScoreState()
     
     useEffect(() => {
-        setStopwatch(calculateStopwacth(minutes, seconds))
+        setTime(calculateStopwacth(minutes, seconds))
     }, [minutes, seconds])
 
     useEffect(() => {
@@ -47,5 +46,9 @@ export default function useStopwatch({ startTime, endTime}: Props): Stopwatch {
         return () => clearInterval(interval);
       }, [startTime, minutes, seconds, endTime]);
 
-      return stopwatch
+      return {
+        time: time,
+        start: () => setStartTime(),
+        end: () => setEndTime()
+      }
 }

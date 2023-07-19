@@ -9,12 +9,17 @@ export default function MicroMousePage() {
   
   return (
       <>
-        <h3>{message}</h3>
-        <Maze />
-        <div>
-          <ScoreDashboard/>
-          <MicroMouseControl />
+        <h3 className="m-8 text-orange-300 text-lg">{message}</h3>
+        <div className="flex justify-center items-center">
+          <div className="p-4">
+            <Maze />
+          </div>
+          <div className="p-4">
+            <ScoreDashboard/>
+            <MicroMouseControl />
+          </div>
         </div>
+        
       </>
   )
 }

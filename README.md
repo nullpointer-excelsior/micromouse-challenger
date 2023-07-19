@@ -16,6 +16,7 @@ npm run dev
     * tiempo de inicio
     * tiempo de termino
     * salida encontrada
+    * total de movimientos
 - [ ] obstaculos:
     * bichos
     * comida
@@ -29,6 +30,7 @@ npm run dev
 - [ ] agregar retrasos de tiempo en las operaciones del ratoncito
 - [x] migrar a typescript
 - [x] generar web del juego en React u otro parecido
+- [ ] tailwindcss para los estilos
 
 
 **Desarrollador:** Benjamín 

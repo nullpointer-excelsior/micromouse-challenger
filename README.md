@@ -31,7 +31,7 @@ npm run dev
 - [x] migrar a typescript
 - [x] generar web del juego en React u otro parecido
 - [ ] tyoescript playgrond para programar el ratoncito
-- [ ] tailwindcss para los estilos
+- [x] tailwindcss para los estilos
 
 
 **Desarrollador:** Benjamín 

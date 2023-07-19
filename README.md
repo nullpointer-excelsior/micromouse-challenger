@@ -1,4 +1,4 @@
-# Soft MicroMices Racing
+# MicroMouse Challenger
 
 Competencia virtual de micromice. este proyecto pretende crear una competencia para resolver un laberinto dond eun ratocito lo recorrera en base al algoritmo dado por los participantes. este algoritmo considerara cual es la mejor ruta y que acciones debera realñizar para optimizar los tiempos de recorrido
 
@@ -30,6 +30,7 @@ npm run dev
 - [ ] agregar retrasos de tiempo en las operaciones del ratoncito
 - [x] migrar a typescript
 - [x] generar web del juego en React u otro parecido
+- [ ] tyoescript playgrond para programar el ratoncito
 - [ ] tailwindcss para los estilos
 
 

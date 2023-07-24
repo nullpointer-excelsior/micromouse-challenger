@@ -5,12 +5,6 @@ import ScoreDashboard from "../../score/infrastructure/ui/components/score-dashb
 import PrimaryButton from "../components/PrimaryButton"
 import { useLocation } from "wouter"
 import { useScoreState } from "../../score/infrastructure/ui/state/score.state"
-// import { useCallback, useState } from "react"
-// import CodeMirror from '@uiw/react-codemirror';
-// import { javascript } from '@codemirror/lang-javascript';
-// import { vscodeDark } from '@uiw/codemirror-theme-vscode';
-// import MicroMouseIDE from "../../micromouse/infrastructure/ui/components/MicroMouseIDE"
-// import Editor from "../../micromouse/infrastructure/ui/components/Editor"
 
 export default function MicroMousePage() {
 

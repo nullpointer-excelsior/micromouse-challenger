@@ -1,8 +1,9 @@
 import { useLocation } from "wouter";
 import { useMazeState } from "../../state/maze.state";
 import PrimaryButton from "../../../../../ui/components/PrimaryButton";
+import { Paths } from "../../../../../ui/router/paths";
 
-export default function StartChallengerButton(props: { matrix: string[][], flag: string }) {
+export default function StartHumanChallengeButton(props: { matrix: string[][], flag: string }) {
     
     const { matrix, flag } = props
     const [,navigate] = useLocation();
@@ -10,7 +11,7 @@ export default function StartChallengerButton(props: { matrix: string[][], flag:
 
     const onClickButton = () => {
         initMaze(flag, matrix)
-        navigate("/micromouse/challenger")
+        navigate(Paths.micromouseChallenge)
     }
 
     return <PrimaryButton className="w-80" onClick={onClickButton} text="COMENZAR DESAFIO"></PrimaryButton>

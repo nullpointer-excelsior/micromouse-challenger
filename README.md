@@ -27,10 +27,10 @@ npm run dev
 - [x] ordenar directorios y archivos
 - [ ] ejemplo de algoritmo basico para la resolucion del laberinto
 - [ ] documentar APIs basicas Mouse, MouseResponses
-- [ ] agregar retrasos de tiempo en las operaciones del ratoncito
+- [x] agregar retrasos de tiempo en las operaciones del ratoncito
 - [x] migrar a typescript
 - [x] generar web del juego en React u otro parecido
-- [ ] tyoescript playgrond para programar el ratoncito
+- [x] typescript playground para programar el ratoncito
 - [x] tailwindcss para los estilos
 - [x] usar el teclado para moverse
 

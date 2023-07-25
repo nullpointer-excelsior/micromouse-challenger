@@ -14,13 +14,13 @@ function Cell({cell, mousePosition }) {
   )
 }
 
-export default function Maze() {
+export default function Maze({ ...rest }) {
  
     const { mousePosition, maze } = useMazeState()
     const cells = MouseMaze.mapMatrixToCells(maze)
 
     return (
-        <div className="flex flex-col items-center border-slate-500 border-8 rounded">
+        <div className="flex flex-col items-center border-slate-500 border-8 rounded" {...rest}>
           {cells.map((row, filaIndex) => (
             <div key={filaIndex} className="flex bg-violet-400">
               {row.map((cell, cellIdx) => <Cell key={cellIdx} cell={cell} mousePosition={mousePosition}/>)}

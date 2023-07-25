@@ -1,16 +1,25 @@
-import { Cell, Mouse, MouseMaze, MouseMazeProps, MouseMoveEvent, MoveMouseResponse } from "./domain";
+import { Cell, Mouse, MouseMaze, MouseMoveEvent, MoveMouseResponse } from "./domain";
 import { EventBus } from "../utils/eventbus";
 import { eventbus } from "../utils/infrastructure";
+
+
+export interface StartChallengeProps {
+    flag: string;
+    matrix: string[][];
+    moveDelay: number;
+}
 
 export class MicroMouse {
 
     ready = false
     private mouse: Mouse
+    private moveDelay = 0
 
     constructor(private readonly eventbus: EventBus) { }
 
-    move(position: 'up' | 'down' | 'left' | 'right'): MoveMouseResponse {
+    async move(position: 'up' | 'down' | 'left' | 'right'): Promise<MoveMouseResponse> {
         const response = this.mouse.move(position)
+        await new Promise(resolve => setTimeout(resolve, this.moveDelay));
         this.eventbus.dispatch(new MouseMoveEvent({
             isMoved: response.mouseMoved,
             message: response.message,
@@ -19,8 +28,9 @@ export class MicroMouse {
         return response
     }
 
-    startChallenger(options: MouseMazeProps) {
+    startChallenger(options: StartChallengeProps) {
         const maze = MouseMaze.create(options)
+        this.moveDelay = options.moveDelay
         this.mouse = new Mouse(maze, maze.getPosition('A0'))
         this.ready = true
     }

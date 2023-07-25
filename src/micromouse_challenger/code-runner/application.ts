@@ -45,8 +45,7 @@ export function getCodeExample() {
     }
     
     interface MicroMouseContext {
-        move(position: 'up' | 'down' | 'left' | 'right'): MoveMouseResponse 
-        startChallenger(options: MouseMazeProps): void ;
+        move(position: 'up' | 'down' | 'left' | 'right'): Promise<MoveMouseResponse> 
         getFlag(): string ;
         getCurrentPosition(): string ;
         getCurrentCell(): Cell ;
@@ -60,12 +59,12 @@ export function getCodeExample() {
      * Funcion principal que ejecutará la lógica de resolución del laberinto.
      * @param micromouse objeto encargado de dirigir y realizar operaciones con el ratoncito.
      */
-    function play(micromouse: MicroMouseContext) {
+    async function play(micromouse: MicroMouseContext) {
       // aca debes realizar tus operaciones con el objeto micromouse
       // para poder mover el ratoncito 🐁
       console.log('vengo de typescript', micromouse)
       if (micromouse.getDownCell().canWalk()) {
-        micromouse.move("down")
+        await micromouse.move("down")
       }
       // ... your fucking awesome code!!!
     }

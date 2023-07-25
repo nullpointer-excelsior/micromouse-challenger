@@ -2,22 +2,11 @@ import { useMazeState } from "../../micromouse/infrastructure/ui/state/maze.stat
 import Maze from "../../micromouse/infrastructure/ui/components/maze/Maze"
 import MicroMouseControl from "../../micromouse/infrastructure/ui/components/micromouse-control/MicroMouseControl"
 import ScoreDashboard from "../../score/infrastructure/ui/components/score-dashboard/ScoreDashboard"
-import PrimaryButton from "../components/PrimaryButton"
-import { useLocation } from "wouter"
-import { useScoreState } from "../../score/infrastructure/ui/state/score.state"
+import BackHomeButton from "../components/BackHomeButton"
 
 export default function MicroMousePage() {
 
-  const { message, reset: resetMazeState } = useMazeState()
-  const { reset: resetScoreState } = useScoreState()
-  const [,navigate] = useLocation();
-
-  const onCLick = () => {
-    resetScoreState()
-    resetMazeState()
-    navigate("/")
-  }
-
+  const { message } = useMazeState()
 
   return (
       <>
@@ -32,8 +21,7 @@ export default function MicroMousePage() {
           </div>
         </div>
         <div className="flex justify-center items-center w-full gap-4">
-          <PrimaryButton onClick={onCLick} className="w-80 my-8" text="VOLVER"/>
-          {/* <PrimaryButton className="w-80 my-8" text="CREAR MICROMOUSE" onClick={() => setShowIde(true)} /> */}
+          <BackHomeButton className="w-80 my-8" />
         </div>
       </>
   )

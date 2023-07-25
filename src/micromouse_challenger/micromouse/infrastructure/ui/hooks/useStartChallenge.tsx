@@ -8,8 +8,8 @@ import { useMazeState } from "../state/maze.state"
 
 export default function useStartChallenge() {
     const { mousePosition, updateMessage, updateMousePosition, flag, maze } = useMazeState()
-    const { incrementMovements, movements } = useScoreState()
-    const {time, start, end }= useStopwatch()
+    const { incrementMovements, movements, reset } = useScoreState()
+    const {time, start, end } = useStopwatch()
 
     useObservable(eventbus.onEvent<MouseMoveEvent>('micromouse.mouse-move'), (event: MouseMoveEvent) => {
         console.log(`event: ${event.payload.position}, mousePosition: ${mousePosition}, micromouse ${micromouse.getCurrentPosition()}`)
@@ -23,9 +23,13 @@ export default function useStartChallenge() {
     })
 
     return {
-        start : () => {
-            micromouse.startChallenger({ flag, matrix: maze })
+        start : (moveDelay = 0) => {
+            micromouse.startChallenger({ flag, matrix: maze, moveDelay })
             start()
+        },
+        stop: () => {
+            end()
+            reset()
         },
         end,
         time,

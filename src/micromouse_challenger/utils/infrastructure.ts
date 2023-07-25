@@ -22,17 +22,3 @@ export class ReactiveEventBus implements EventBus {
 
 export const eventbus = new ReactiveEventBus()
 
-
-class EventNitido extends Event<string> {
-    get name(): string {
-        return "nitido"
-    }
-
-}
-
-class EventPulento extends Event<{ person: string, age: number}> {
-    get name(): string {
-        return "nitido"
-    }
-
-}

@@ -1,39 +1,30 @@
-
-import Editor from '@monaco-editor/react';
 import PrimaryButton from '../components/PrimaryButton';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { createMicromouseCode, getCodeExample } from '../../code-runner/application';
-import { createScriptElement, deleteScriptElement } from '../../code-runner/infrastructure/ui/native-dom';
-import { useMazeState } from '../../micromouse/infrastructure/ui/state/maze.state';
-import { micromouse } from '../../micromouse/application';
-import { useLocation } from 'wouter';
 import Maze from '../../micromouse/infrastructure/ui/components/maze/Maze';
 import useStartChallenge from '../../micromouse/infrastructure/ui/hooks/useStartChallenge';
+import BackHomeButton from '../components/BackHomeButton';
+import useScriptElement from '../../code-runner/infrastructure/ui/hooks/useScriptElement';
+import ScoreDashboard from '../../score/infrastructure/ui/components/score-dashboard/ScoreDashboard';
+import CodeEditor from '../../code-runner/infrastructure/ui/components/CodeEditor';
 
 
 export default function CodeRunnerPage() {
-  const micromouseScriptId = "micromouse-script"
-  const defaultCode = getCodeExample()
+  
   const [code, setCode] = useState(null)
-  const { flag, maze } = useMazeState()
-  const [, location] = useLocation()
+  const { start, stop } = useStartChallenge()
+  const { createScript } = useScriptElement()
+  
+  const defaultCode = getCodeExample()
 
-  const { start } = useStartChallenge()
-
-
-    useEffect(() => {
-        micromouse.startChallenger({ flag, matrix: maze })
-    }, [])
-
-  useEffect(() => {
-    return () => deleteScriptElement(micromouseScriptId);
-  }, []);
-
-  const executeMicromouse = () => {
-    start()
+  const onExecuteMicromouse = () => {
+    stop()
+    start(300)
     const micromouseCode = createMicromouseCode(code ?? defaultCode)
-    createScriptElement(micromouseScriptId, micromouseCode)
+    createScript(micromouseCode)
   }
+
+  const onChangeCode = (value: string, e: any) => setCode(value)
 
   return (
     <>
@@ -43,23 +34,16 @@ export default function CodeRunnerPage() {
         Tu misión, si decides aceptarla, es crear una función que permita liberar al pequeño ratón atrapado en un laberinto.
         La estructura de la función que debes desarrollar es la siguiente:
       </p>
+      <div className="flex justify-center items-center my-8">
+        <ScoreDashboard />
+      </div>
       <div className="flex justify-center items-center gap-6">
         <Maze />
-        <Editor
-          height="50vh"
-          width="90vh"
-          defaultLanguage="typescript"
-          theme='vs-dark'
-          defaultValue={defaultCode}
-          onChange={(value: string, e: any) => {
-            setCode(value)
-          }}
-        />
-        
+        <CodeEditor defaultValue={defaultCode} onChange={onChangeCode} />
       </div>
       <div className="flex justify-center items-center gap-6 my-8">
-        <PrimaryButton text="EJECUTAR MICROMOUSE" onClick={executeMicromouse} />
-        <PrimaryButton text="VOLVER" onClick={() => location("/")} />
+        <PrimaryButton text="EJECUTAR MICROMOUSE" onClick={onExecuteMicromouse} />
+        <BackHomeButton className="w-80 my-8" />
       </div>
     </>
   )

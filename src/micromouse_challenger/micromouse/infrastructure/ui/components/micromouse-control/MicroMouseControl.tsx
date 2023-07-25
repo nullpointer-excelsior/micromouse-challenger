@@ -17,10 +17,10 @@ export default function MicroMouseControl() {
     }
   }
 
-  const onClickUp = () => micromouse.move('up')
-  const onClickDown = () => micromouse.move('down')
-  const onClickLeft = () => micromouse.move('left')
-  const onClickRight = () => micromouse.move('right')
+  const onClickUp = async () => micromouse.move('up')
+  const onClickDown = async () => micromouse.move('down')
+  const onClickLeft = async () => micromouse.move('left')
+  const onClickRight = async () => micromouse.move('right')
 
   useEffect(() => {
     const handleKeyDown = (event) => {

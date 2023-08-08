@@ -21,7 +21,7 @@ export default function MicroMousePage() {
           </div>
         </div>
         <div className="flex justify-center items-center w-full gap-4">
-          <BackHomeButton className="w-80 my-8" />
+          <BackHomeButton onClick={() => {}} className="w-80 my-8" />
         </div>
       </>
   )

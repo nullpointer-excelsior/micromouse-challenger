@@ -8,8 +8,8 @@ export default function useScriptElement() {
         return () => deleteScriptElement(scriptId);
     }, []);
 
-    const createScript = (code: string) => {
-        createScriptElement(scriptId, code)
+    const createScript = (code: string, onload: () => void) => {
+        createScriptElement(scriptId, code, onload)
     }
 
     return {

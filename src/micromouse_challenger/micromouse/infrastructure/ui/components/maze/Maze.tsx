@@ -8,7 +8,7 @@ function Cell({cell, mousePosition }) {
     // 'S': 'bg-green-700',
   };
   return (
-    <div className={`w-4 h-4 flex justify-center items-center ${colors[cell.type] || ''}`}>
+    <div className={`w-3 h-3 flex justify-center items-center ${colors[cell.type] || ''}`}>
       <CellContent mousePosition={mousePosition} cell={cell}/>
     </div>
   )

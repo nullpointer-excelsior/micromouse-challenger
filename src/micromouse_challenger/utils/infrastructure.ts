@@ -15,6 +15,7 @@ export class ReactiveEventBus implements EventBus {
     }
 
     dispatch<T extends Event<any>>(event: T): void {
+        console.log('DISPATCHING', event.name)
         this.subject.next(event)
     }
 

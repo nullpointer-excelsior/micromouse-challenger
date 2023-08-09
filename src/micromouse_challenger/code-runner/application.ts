@@ -66,35 +66,85 @@ export function getCodeExample() {
     async function play(micromouse: MicroMouseContext) {
       // aca debes realizar tus operaciones con el objeto micromouse
       // para poder mover el ratoncito 🐁
-      console.log('vengo de typescript', micromouse)
+      console.log('Challenge micromouse', micromouse)
     let res: MoveMouseResponse  = null
+    let invalidPositions = []
     while (true) {
-        if (micromouse.getDownCell() && micromouse.getDownCell().canWalk()) {
+        if (micromouse.getDownCell() && micromouse.getDownCell().canWalk() && !invalidPositions.includes('down')) {
             res = await micromouse.move("down")
-            if (!res.mouseMoved) {
+            if (res.mouseMoved) {
+                continue
+            } else {
+                invalidPositions.push('down')
+                if (invalidPositions.length === 4) {
+                    invalidPositions = []
+                    continue
+                }
+            }
+        } else {
+            invalidPositions.push('down')
+            if (invalidPositions.length === 4) {
+                invalidPositions = []
                 continue
             }
         }
-        if (micromouse.getLeftCell() && micromouse.getLeftCell().canWalk()) {
+        if (micromouse.getLeftCell() && micromouse.getLeftCell().canWalk() && !invalidPositions.includes('left')) {
             res = await micromouse.move("left")
-            if (!res.mouseMoved) {
+            if (res.mouseMoved) {
+                continue
+            } else {
+
+                invalidPositions.push('left')
+                if (invalidPositions.length === 4) {
+                    invalidPositions = []
+                    continue
+                }
+            }
+        } else {
+            invalidPositions.push('left')
+            if (invalidPositions.length === 4) {
+                invalidPositions = []
                 continue
             }
         }
-        if (micromouse.getRightCell() && micromouse.getRightCell().canWalk()) {
-            res = await micromouse.move("right")
-            if (!res.mouseMoved) {
+        if (micromouse.getRightCell() && micromouse.getRightCell().canWalk() && !invalidPositions.includes('right')) {
+            res = await micromouse.move('right')
+            if (res.mouseMoved) {
                 continue
+            } else {
+                invalidPositions.push('rigth')
+                if (invalidPositions.length === 4) {
+                    invalidPositions = []
+                    continue
+                }
             }
+        } else {
+            invalidPositions.push('rigth')
         }
-        if (micromouse.getUpCell() && micromouse.getUpCell().canWalk()) {
+        if (micromouse.getUpCell() && micromouse.getUpCell().canWalk() && !invalidPositions.includes('up')) {
             res = await micromouse.move("up")
-            if (!res.mouseMoved) {
+            if (res.mouseMoved) {
+                continue
+            } else {
+                invalidPositions.push('up')
+                if (invalidPositions.length === 4) {
+                    invalidPositions = []
+                    continue
+                }
+            }
+        } else {
+            invalidPositions.push('up')
+            if (invalidPositions.length === 4) {
+                invalidPositions = []
                 continue
             }
+        }
+        console.log('mouse-log', invalidPositions.length)
+        if (invalidPositions.length === 4) {
+            invalidPositions = []
+
         }
         
-
     }
 
       

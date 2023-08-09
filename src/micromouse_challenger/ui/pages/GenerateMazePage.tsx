@@ -12,12 +12,12 @@ export default function GenerateMazePage() {
         <>
             <p className="m-4 text-orange-300 text-lg">Genera el laberinto que quieres desafiar y comienza el desafio</p>
             <MazeGenerator />
-            <div>
+            {/* <div>
                 <StartHumanChallengeButton matrix={matrix} flag={flag} />
-            </div>
-            <div className="mt-6">
+            </div> */}
+            {/* <div className="mt-6"> */}
                 <StartCodeChallengeButton matrix={matrix} flag={flag}/>
-            </div>
+            {/* </div> */}
         </>
     )
 }

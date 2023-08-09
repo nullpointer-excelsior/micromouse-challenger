@@ -21,7 +21,6 @@ npm run dev
     * bichos
     * comida
     * piedras
-- [ ] obtener y enviar flag
 - [x] tomar tiempo
 - [x] generacion de laberintos complejos
 - [x] ordenar directorios y archivos
@@ -33,6 +32,10 @@ npm run dev
 - [x] typescript playground para programar el ratoncito
 - [x] tailwindcss para los estilos
 - [x] usar el teclado para moverse
+- [x] Eliminar los console.logs en la version productiva 
+- [ ] Mostrar console logs en pagina
+- [ ] ejecutar codigo de desafio en service worker
+- [ ] despliegue aplicacion
 
 
 **Desarrollador:** Benjamín 

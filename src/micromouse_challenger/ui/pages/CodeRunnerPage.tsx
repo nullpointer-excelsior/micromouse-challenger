@@ -28,7 +28,6 @@ export default function CodeRunnerPage() {
   const onExecuteMicromouse = () => {
 
     const micromouseCode = createMicromouseCode(code)
-    console.log("execute-micromouse")
     
     setShowSandbox(!showSandbox)
     setBtText(!showSandbox? "DETENER" : "EJECUTAR")

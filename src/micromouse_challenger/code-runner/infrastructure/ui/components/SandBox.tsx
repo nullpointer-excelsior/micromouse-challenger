@@ -1,7 +1,7 @@
 import useScriptElement from "../hooks/useScriptElement";
 import useSandBoxParent from "../hooks/useSandBoxParent";
 import { useEffect } from "react";
-import { MicroMouse, micromouseGame} from "../../../../micromouse/application";
+import { MicroMouse, micromouseGame } from "../../../../micromouse/application";
 import { eventbus } from "../../../../utils/infrastructure";
 import { useMazeState } from "../../../../micromouse/infrastructure/ui/state/maze.state";
 import ScoreDashboard from "../../../../score/infrastructure/ui/components/score-dashboard/ScoreDashboard";
@@ -12,33 +12,32 @@ import { useScoreState } from "../../../../score/infrastructure/ui/state/score.s
 import useObservable from "../../../../ui/hooks/useObservable";
 
 export default function SandBox() {
-    
+
     const { createScript } = useScriptElement()
     const { message } = useSandBoxParent()
-    const initChallenge = useMazeState(state => state.initMaze)
-    const { mousePosition, updateMessage, updateMousePosition, flag, maze } = useMazeState()
+    const { updateMessage, updateMousePosition, initMaze } = useMazeState()
     const { incrementMovements } = useScoreState()
     const { start, end } = useStopwatch()
-    
 
     const mouseMove$ = eventbus.onEvent<MouseMoveEvent>('micromouse.mouse-move')
 
     useObservable(mouseMove$, {
         complete: () => console.log("terminado!!!"),
         next: (event: MouseMoveEvent) => {
-            console.log('event', event)
-        console.log(`event: ${event.payload.position}, mousePosition: ${mousePosition}`)
-        updateMousePosition(event.payload.position)
-        updateMessage(event.payload.message)
-        incrementMovements()
-        if (event.payload.isMoved && micromouseGame.getMicromouse().getCurrentCell().isExit()) {
-            end()
-            alert("Congratulations!! ")
+            // console.log('event', event)
+            // console.log(`event: ${event.payload.position}, mousePosition: ${mousePosition}`)
+            updateMousePosition(event.payload.position)
+            updateMessage(event.payload.message)
+            incrementMovements()
+            if (event.payload.isMoved && micromouseGame.getMicromouse().getCurrentCell().isExit()) {
+                end()
+                alert("Congratulations!! ")
+            }
         }
-    }})
+    })
 
     useEffect(() => {
-        console.log('message-from-parent', message)
+        // console.log('message-from-parent', message)
         if (message) {
             const micromouse = MicroMouse.create({
                 flag: "na",
@@ -46,9 +45,8 @@ export default function SandBox() {
                 moveDelay: 500
             })
             micromouseGame.start(micromouse)
-            initChallenge("na", message.matrix)
+            initMaze("na", message.matrix)
             createScript(message.code, () => {
-                console.log("script loaded!!", micromouseGame.getMicromouse())
                 // @ts-ignore
                 play(micromouseGame.getMicromouse())
             })

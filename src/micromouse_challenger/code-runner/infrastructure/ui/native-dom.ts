@@ -18,7 +18,6 @@ export function createScriptElement(id: string, src: string, onload: () => void)
 
 export function sendMessageToIframe<T>(id: string, message: T) {
     const iframe = document.getElementById(id) as HTMLIFrameElement;
-    console.log('sending message', iframe)
     if (iframe) {
       iframe.contentWindow.postMessage(message, '*');
     }

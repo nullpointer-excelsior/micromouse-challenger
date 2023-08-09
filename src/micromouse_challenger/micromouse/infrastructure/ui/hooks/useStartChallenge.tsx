@@ -9,7 +9,7 @@ import { useMazeState } from "../state/maze.state"
 
 
 export default function useStartChallenge() {
-    const { mousePosition, updateMessage, updateMousePosition, flag, maze } = useMazeState()
+    const { updateMessage, updateMousePosition, flag, maze } = useMazeState()
     const { incrementMovements, movements, reset } = useScoreState()
     const {time, start, end } = useStopwatch()
 
@@ -18,7 +18,6 @@ export default function useStartChallenge() {
     useObservable(mouseMove$, {
         complete: () => console.log("terminado!!!"),
         next: (event: MouseMoveEvent) => {
-        console.log(`event: ${event.payload.position}, mousePosition: ${mousePosition}`)
         updateMousePosition(event.payload.position)
         updateMessage(event.payload.message)
         incrementMovements()

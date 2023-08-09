@@ -1,4 +1,4 @@
-import { Cell, Mouse, MouseMaze, MouseMoveEvent, MoveMouseResponse } from "./domain";
+import { Cell, Mouse, MouseMaze, MouseMoveEvent, MouseWinEvent, MoveMouseResponse } from "./domain";
 import { EventBus } from "../utils/eventbus";
 import { eventbus } from "../utils/infrastructure";
 
@@ -15,18 +15,26 @@ export class MicroMouse {
         await new Promise(resolve => setTimeout(resolve, this.moveDelay));
 
         const response = this.mouse.move(position)
+        
         this.eventbus.dispatch(new MouseMoveEvent({
             isMoved: response.mouseMoved,
             message: response.message,
             position: response.cellPosition.getCurrentPosition()
         }))
 
+        if (response.mouseMoved && response.cellPosition.value.isExit()) {
+            this.eventbus.dispatch(new MouseWinEvent("Felicitaciones ganaste maldito bastardo!!"))
+        }
+
         return response
 
     }
 
     static create(params: { matrix: string[][], flag: string, moveDelay: number }) {
-        const maze = MouseMaze.create(params)
+        const maze = MouseMaze.create({
+            flag: params.flag,
+            matrix: params.matrix
+        })
         const mouse = new Mouse(maze, maze.getPosition('A0'))
         return new MicroMouse(
             eventbus,

@@ -12,7 +12,6 @@ export default function MicroMouseControl() {
   const onClickControls = () => {
     setPlaying(true)
     if (time === "00:00") {
-      console.log('starting!!!')
       start()
     }
   }

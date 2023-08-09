@@ -1,10 +1,11 @@
 import PrimaryButton from '../components/PrimaryButton';
 import { useState } from 'react';
-import { createMicromouseCode, getCodeExample } from '../../code-runner/application';
 import CodeEditor from '../../code-runner/infrastructure/ui/components/CodeEditor';
 import { useMazeState } from '../../micromouse/infrastructure/ui/state/maze.state';
 import SandboxIframe from '../../code-runner/infrastructure/ui/components/SandboxIframe';
 import BackHomeButton from '../components/BackHomeButton';
+import { getCodeExample } from '../../code-runner/application/getCodeExample';
+import { createMicromouseCode } from '../../code-runner/application/createMicromouseCode';
 
 
 const helpTexts = {

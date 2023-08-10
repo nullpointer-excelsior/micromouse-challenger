@@ -14,13 +14,6 @@ export class InvalidCellNameException extends Error {
     }
 }
 
-export class FlagNotFoundException extends Error { 
-    constructor(message: string) {
-        super(message)
-        this.name ='FlagNotFoundException'
-    }
-}
-
 export class Cell {
 
     constructor(
@@ -67,13 +60,12 @@ export class CellPosition {
 }
 
 export interface MouseMazeProps {
-    flag: string;
     matrix: string[][];
 }
 
 export class MouseMaze {
 
-    constructor(public readonly flag: string, public readonly maze: Cell[][]) { }
+    constructor(public readonly maze: Cell[][]) { }
 
     private findIndexes(valor: string): [number, number] | null {
         for (let i = 0; i < this.maze.length; i++) {
@@ -123,7 +115,7 @@ export class MouseMaze {
     }
 
     static create(props: MouseMazeProps): MouseMaze {
-        const {matrix, flag} = props
+        const {matrix } = props
         const matrixCells: Cell[][] = [];
         for (let i = 0; i < matrix.length; i++) {
             const row: Cell[] = [];
@@ -134,7 +126,7 @@ export class MouseMaze {
             }
             matrixCells.push(row);
         }
-        return new MouseMaze(flag, matrixCells);
+        return new MouseMaze(matrixCells);
     }
 
     static mapMatrixToCells(matrix: string[][]): Cell[][] {
@@ -213,13 +205,6 @@ export class Mouse {
             cellPosition,
             true
         );
-    }
-
-    getFlag() {
-        if (this.getCurrentCell().isExit()) {
-            return this.maze.flag
-        }
-        throw new FlagNotFoundException(`Flag no encontrada en posicion actual ${this.getCurrentPosition()}`)
     }
 
     getCurrentPosition(): string {

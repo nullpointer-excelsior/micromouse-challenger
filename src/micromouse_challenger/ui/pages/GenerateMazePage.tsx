@@ -6,7 +6,7 @@ import StartHumanChallengeButton from "../../micromouse/infrastructure/ui/compon
 
 export default function GenerateMazePage() {
 
-    const { matrix, flag } = useMazeGeneratorState()
+    const { matrix } = useMazeGeneratorState()
 
     return (
         <>
@@ -16,7 +16,7 @@ export default function GenerateMazePage() {
                 <StartHumanChallengeButton matrix={matrix} flag={flag} />
             </div> */}
             {/* <div className="mt-6"> */}
-                <StartCodeChallengeButton matrix={matrix} flag={flag}/>
+                <StartCodeChallengeButton matrix={matrix}/>
             {/* </div> */}
         </>
     )

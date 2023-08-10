@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import { Maze } from './domain';
 
 
@@ -74,9 +73,8 @@ export class MazeMatrixGenerator {
 export class MazeGenerator {
 
     generate(): Promise<Maze> {
-        const flag = uuidv4()
         const matrix = new MazeMatrixGenerator(30, 30).generate()
-        return Promise.resolve(new Maze(flag, matrix))
+        return Promise.resolve(new Maze(matrix))
     }
 
 }

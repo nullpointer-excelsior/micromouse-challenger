@@ -13,7 +13,6 @@ export default function MazeGenerator() {
         mazeGenerator
             .generate()
             .then(maze => updateMaze({ 
-                flag: maze.flag, 
                 matrix: maze.matrix 
             }))
     }

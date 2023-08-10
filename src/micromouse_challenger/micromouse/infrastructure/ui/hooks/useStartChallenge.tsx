@@ -9,7 +9,7 @@ import { useMazeState } from "../state/maze.state"
 
 
 export default function useStartChallenge() {
-    const { updateMessage, updateMousePosition, flag, maze } = useMazeState()
+    const { updateMessage, updateMousePosition, maze } = useMazeState()
     const { incrementMovements, movements, reset } = useScoreState()
     const {time, start, end } = useStopwatch()
 
@@ -31,7 +31,6 @@ export default function useStartChallenge() {
         start : (moveDelay = 0) => {
             const micromouse = MicroMouse.create({
                 matrix: maze,
-                flag: flag,
                 moveDelay: moveDelay
             })
             micromouseGame.start(micromouse)

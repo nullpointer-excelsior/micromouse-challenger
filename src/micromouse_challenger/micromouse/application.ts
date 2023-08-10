@@ -30,9 +30,8 @@ export class MicroMouse {
 
     }
 
-    static create(params: { matrix: string[][], flag: string, moveDelay: number }) {
+    static create(params: { matrix: string[][], moveDelay: number }) {
         const maze = MouseMaze.create({
-            flag: params.flag,
             matrix: params.matrix
         })
         const mouse = new Mouse(maze, maze.getPosition('A0'))
@@ -41,10 +40,6 @@ export class MicroMouse {
             mouse,
             params.moveDelay
         )
-    }
-
-    getFlag(): string {
-        return this.mouse.getFlag()
     }
 
     getCurrentPosition(): string {

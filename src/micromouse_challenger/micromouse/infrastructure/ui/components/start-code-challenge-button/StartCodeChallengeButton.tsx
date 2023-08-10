@@ -3,14 +3,14 @@ import { useMazeState } from "../../state/maze.state";
 import PrimaryButton from "../../../../../ui/components/PrimaryButton";
 import { Paths } from "../../../../../ui/router/utils/paths";
 
-export default function StartCodeChallengeButton(props: { matrix: string[][], flag: string }) {
+export default function StartCodeChallengeButton(props: { matrix: string[][] }) {
     
-    const { matrix, flag } = props
+    const { matrix } = props
     const [,navigate] = useLocation();
     const initMaze = useMazeState(state => state.initMaze)
 
     const onClickButton = () => {
-        initMaze(flag, matrix)
+        initMaze(matrix)
         navigate(Paths.MICROMOUSE_CODERUNNER)
     }
 

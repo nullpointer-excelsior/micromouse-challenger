@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export interface MicromouseMessage {
-    matrix: string[][];
+    matrix: string[][]
     code: string
 }
 

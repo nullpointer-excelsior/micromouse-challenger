@@ -12,7 +12,7 @@ export default function SandboxIframe(props: { message: IframeMessage }) {
     const { message } = props;
   
     const handleOnLoad = () => {
-      setTimeout(() => sendMessageToIframe(iframeId, message), 3000)
+      setTimeout(() => sendMessageToIframe(iframeId, message), 1000)
     }
   
     return <iframe className='rounded' id={iframeId} onLoad={handleOnLoad} width="800px" height="500px" src="/sandbox"  />;

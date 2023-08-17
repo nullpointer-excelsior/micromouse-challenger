@@ -1,4 +1,4 @@
-import { Event } from "../utils/eventbus";
+import { DomainEvent } from "../utils/eventbus";
 
 export class InvalidMazeLocationException extends Error { 
     constructor(message: string) {
@@ -153,22 +153,20 @@ export class MoveMouseResponse {
     ) { }
 }
 
+export type MicromouseEvent = "micromouse.mouse-move" | "micromouse.mouse-win"
+
 export interface MouseEventProps {
     isMoved: boolean;
     message: string;
     position: string;
 }
 
-export class MouseMoveEvent extends Event<MouseEventProps>{
-    get name(): string {
-        return "micromouse.mouse-move";
-    }
+export class MouseMoveEvent extends DomainEvent<MouseEventProps, MicromouseEvent>{
+    name: MicromouseEvent = "micromouse.mouse-move";
 }
 
-export class MouseWinEvent extends Event<string> {
-    get name(): string {
-        return "micromouse.mouse-win";
-    }
+export class MouseWinEvent extends DomainEvent<string, MicromouseEvent> {
+    name: MicromouseEvent = "micromouse.mouse-win";
 }
 
 export class Mouse {

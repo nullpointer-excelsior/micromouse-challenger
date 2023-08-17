@@ -13,15 +13,15 @@ export default function useStartChallenge() {
     const { incrementMovements, movements, reset } = useScoreState()
     const {time, start, end } = useStopwatch()
 
-    const mouseMove$ = eventbus.onEvent<MouseMoveEvent>('micromouse.mouse-move')
+    const mouseMove$ = eventbus.onEvent("micromouse.mouse-move")
 
     useObservable(mouseMove$, {
         complete: () => console.log("terminado!!!"),
         next: (event: MouseMoveEvent) => {
-        updateMousePosition(event.payload.position)
-        updateMessage(event.payload.message)
+        updateMousePosition(event.data.position)
+        updateMessage(event.data.message)
         incrementMovements()
-        if (event.payload.isMoved && micromouseGame.getMicromouse().getCurrentCell().isExit()) {
+        if (event.data.isMoved && micromouseGame.getMicromouse().getCurrentCell().isExit()) {
             end()
             alert("Congratulations!! ")
         }

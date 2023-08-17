@@ -49,6 +49,7 @@ export function getCodeExample() {
     let res: MoveMouseResponse  = null
     let invalidPositions = []
     while (true) {
+        console.log('Code-example-print-micromouse-potition', micromouse.getCurrentPosition())
         if (micromouse.getDownCell() && micromouse.getDownCell().canWalk() && !invalidPositions.includes('down')) {
             res = await micromouse.move("down")
             if (res.mouseMoved) {

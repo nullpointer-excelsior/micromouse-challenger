@@ -1,11 +1,11 @@
-import { Cell, Mouse, MouseMaze, MouseMoveEvent, MouseWinEvent, MoveMouseResponse } from "./domain";
+import { Cell, MicromouseEvent, Mouse, MouseMaze, MouseMoveEvent, MouseWinEvent, MoveMouseResponse } from "./domain";
 import { EventBus } from "../utils/eventbus";
 import { eventbus } from "../utils/infrastructure";
 
 export class MicroMouse {
 
     constructor(
-        private readonly eventbus: EventBus,
+        private readonly eventbus: EventBus<MicromouseEvent>,
         private readonly mouse: Mouse,
         private readonly moveDelay = 0,
     ) { }

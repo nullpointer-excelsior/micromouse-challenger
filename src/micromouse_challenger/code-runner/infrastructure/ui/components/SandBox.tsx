@@ -1,15 +1,13 @@
 import useScriptElement from "../hooks/useScriptElement";
 import useSandBoxParent from "../hooks/useSandBoxParent";
 import { useEffect } from "react";
-import { MicroMouse, micromouseGame } from "../../../../micromouse/application";
-import { eventbus } from "../../../../utils/infrastructure";
 import { useMazeState } from "../../../../micromouse/infrastructure/ui/state/maze.state";
 import ScoreDashboard from "../../../../score/infrastructure/ui/components/score-dashboard/ScoreDashboard";
 import Maze from "../../../../micromouse/infrastructure/ui/components/maze/Maze";
-import { MouseMoveEvent } from "../../../../micromouse/domain";
 import useStopwatch from "../../../../score/infrastructure/ui/components/stopwatch/useStopwatch";
 import { useScoreState } from "../../../../score/infrastructure/ui/state/score.state";
-import useObservable from "../../../../ui/hooks/useObservable";
+import { createCodeRunnerWorker } from "../../../application/createCodeRunnerWorker";
+import { StartMicromouseMessage, MicromouseMoveMessage, WorkerMessage } from "../../../domain/CodeRunnerMessage";
 
 export default function SandBox() {
 
@@ -19,39 +17,34 @@ export default function SandBox() {
     const { incrementMovements } = useScoreState()
     const { start, end } = useStopwatch()
 
-    const mouseMove$ = eventbus.onEvent<MouseMoveEvent>('micromouse.mouse-move')
-
-    useObservable(mouseMove$, {
-        complete: () => console.log("terminado!!!"),
-        next: (event: MouseMoveEvent) => {
-            // console.log('event', event)
-            // console.log(`event: ${event.payload.position}, mousePosition: ${mousePosition}`)
-            updateMousePosition(event.payload.position)
-            updateMessage(event.payload.message)
-            incrementMovements()
-            if (event.payload.isMoved && micromouseGame.getMicromouse().getCurrentCell().isExit()) {
-                end()
-                alert("Congratulations!! ")
-            }
-        }
-    })
-
     useEffect(() => {
-        // console.log('message-from-parent', message)
         if (message) {
-            const micromouse = MicroMouse.create({
-                flag: "na",
-                matrix: message.matrix,
-                moveDelay: 500
-            })
-            micromouseGame.start(micromouse)
-            initMaze("na", message.matrix)
+            initMaze(message.matrix)
+            const worker = createCodeRunnerWorker()
             createScript(message.code, () => {
                 // @ts-ignore
-                play(micromouseGame.getMicromouse())
+                // play(micromouseGame.getMicromouse())
+                worker.sendMessage(new WorkerMessage("sandbox starting worker!"))
+                worker.sendMessage(new StartMicromouseMessage(message))
+                
+                worker.onMessage<MicromouseMoveMessage>("MICROMOUSE_MOVE").subscribe({
+                    next: (x) => {
+                        // console.log('micromouse-event-move', x.payload.micromouseEvent)
+                        updateMousePosition(x.payload.micromouseEvent.data.position)
+                        updateMessage(x.payload.micromouseEvent.data.message)
+                        incrementMovements()
+                    },
+                    error: (err) => console.log(err)
+                })
+                
             })
             start()
+            return () => {
+                console.log("web-worker terminated")
+                worker.terminate()
+            }
         }
+        
     }, [message])
 
 

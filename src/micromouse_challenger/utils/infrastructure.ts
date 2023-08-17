@@ -1,24 +1,28 @@
-import { Observable, Subject, filter, share, tap } from "rxjs";
-import { Event, EventBus } from "./eventbus";
+import { Observable, Subject, filter, iif, tap } from "rxjs";
+import { EventBus, DomainEvent } from "./eventbus";
+import { MicromouseEvent } from "../micromouse/domain";
 
-export class ReactiveEventBus implements EventBus {
 
-    private subject: Subject<Event<any>> = new Subject()
+/**
+ * An implementation of EventBus using RxJS.
+ */
+export class ReactiveEventBus<E extends string> implements EventBus<E> {
 
-    onEvent<T extends Event<any>>(name?: string): Observable<T> {
-        if (name) {
-            return this.subject.pipe(
-                filter(event => event.name === name),
-            ) as Observable<T>;
-        }
-        return this.subject.asObservable() as Observable<T>;
+    private events$ = new Subject<DomainEvent<any, E>>()
+
+    onEvent<T extends DomainEvent<any, E>>(eventName?: E): Observable<T> {
+        return iif(
+            () => eventName !== undefined,
+            this.events$.pipe(filter(event => eventName === event.name)),
+            this.events$.asObservable()
+        ) as Observable<T>;
     }
 
-    dispatch<T extends Event<any>>(event: T): void {
-        this.subject.next(event)
+    dispatch<T extends DomainEvent<any, E>>(event: T): void {
+        this.events$.next(event)
     }
 
 }
 
-export const eventbus = new ReactiveEventBus()
+export const eventbus = new ReactiveEventBus<MicromouseEvent>()
 

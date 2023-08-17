@@ -7,7 +7,7 @@ Competencia virtual de micromice. este proyecto pretende crear una competencia p
 ```bash
 npm run dev
 
-``````
+```
 
 
 ## BACKLOG
@@ -37,6 +37,6 @@ npm run dev
 - [x] ejecutar codigo de desafio en service worker
 - [ ] despliegue aplicacion
 - [ ] tiempo limite de juego
-
+- [ ] manejar errores en micrompuse code y worker
 
 **Desarrollador:** Benjamín 

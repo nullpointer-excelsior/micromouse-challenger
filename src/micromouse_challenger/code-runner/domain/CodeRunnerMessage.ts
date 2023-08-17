@@ -1,4 +1,4 @@
-import { MouseMoveEvent } from "../../micromouse/domain"
+import { MouseMoveEvent } from "../../micromouse/domain/Events"
 
 export type CodeRunnerMessageType =  'START_MICROMOUSE' | 'WORKER' | 'MICROMOUSE_MOVE'
 

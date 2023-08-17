@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ControlButton from "../control-button/ControlButton";
 import PrimaryButton from "../../../../../ui/components/PrimaryButton";
 import useStartChallenge from "../../hooks/useStartChallenge";
-import { micromouseGame } from "../../../../application";
+import { micromouseGame } from "../../../../application/MicromouseGame";
 
 export default function MicroMouseControl() {
 

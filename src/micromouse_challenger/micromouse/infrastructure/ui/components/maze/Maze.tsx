@@ -1,5 +1,5 @@
+import { MouseMaze } from '../../../../domain/MouseMaze';
 import { useMazeState } from '../../state/maze.state';
-import { MouseMaze } from '../../../../domain';
 import CellContent from './CellContent';
 
 function Cell({cell, mousePosition }) {

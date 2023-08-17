@@ -1,6 +1,10 @@
-import { Cell, MicromouseEvent, Mouse, MouseMaze, MouseMoveEvent, MouseWinEvent, MoveMouseResponse } from "./domain";
-import { EventBus } from "../utils/eventbus";
-import { eventbus } from "../utils/infrastructure";
+import { EventBus } from "../../utils/eventbus";
+import { eventbus } from "../../utils/infrastructure";
+import { Cell } from "../domain/Cell";
+import { MicromouseEvent, MouseMoveEvent, MouseWinEvent } from "../domain/Events";
+import { Mouse } from "../domain/Mouse";
+import { MouseMaze } from "../domain/MouseMaze";
+import { MoveMouseResponse } from "../domain/MoveMouseResponse";
 
 export class MicroMouse {
 
@@ -67,20 +71,3 @@ export class MicroMouse {
     }
 
 }
-
-
-export class MicromouseGame {
-    
-    private micromouse: MicroMouse | null = null
-    
-    start(micromouse: MicroMouse) {
-        this.micromouse = micromouse
-    }
-
-    getMicromouse() {
-        return this.micromouse
-    }
-
-}
-
-export const micromouseGame = new MicromouseGame()

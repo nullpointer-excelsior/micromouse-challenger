@@ -1,4 +1,4 @@
-import useScriptElement from "../hooks/useScriptElement";
+// import useScriptElement from "../hooks/useScriptElement";
 import useSandBoxParent from "../hooks/useSandBoxParent";
 import { useEffect } from "react";
 import { useMazeState } from "../../../../micromouse/infrastructure/ui/state/maze.state";
@@ -11,7 +11,7 @@ import { StartMicromouseMessage, MicromouseMoveMessage, WorkerMessage } from "..
 
 export default function SandBox() {
 
-    const { createScript } = useScriptElement()
+    // const { createScript } = useScriptElement()
     const { message } = useSandBoxParent()
     const { updateMessage, updateMousePosition, initMaze } = useMazeState()
     const { incrementMovements } = useScoreState()
@@ -21,7 +21,7 @@ export default function SandBox() {
         if (message) {
             initMaze(message.matrix)
             const worker = createCodeRunnerWorker()
-            createScript(message.code, () => {
+            // createScript(message.code, () => {
                 // @ts-ignore
                 // play(micromouseGame.getMicromouse())
                 worker.sendMessage(new WorkerMessage("sandbox starting worker!"))
@@ -29,7 +29,6 @@ export default function SandBox() {
                 
                 worker.onMessage<MicromouseMoveMessage>("MICROMOUSE_MOVE").subscribe({
                     next: (x) => {
-                        // console.log('micromouse-event-move', x.payload.micromouseEvent)
                         updateMousePosition(x.payload.micromouseEvent.data.position)
                         updateMessage(x.payload.micromouseEvent.data.message)
                         incrementMovements()
@@ -37,7 +36,7 @@ export default function SandBox() {
                     error: (err) => console.log(err)
                 })
                 
-            })
+            // })
             start()
             return () => {
                 console.log("web-worker terminated")

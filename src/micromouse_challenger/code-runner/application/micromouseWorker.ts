@@ -1,8 +1,8 @@
 import { filter, fromEventPattern, map, tap } from "rxjs";
-import { MicroMouse } from "../../micromouse/application";
 import { eventbus } from "../../utils/infrastructure";
 import { CodeRunnerMessage, MicromouseMoveMessage } from "../domain/CodeRunnerMessage";
-import { MouseMoveEvent } from "../../micromouse/domain";
+import { MicroMouse } from "../../micromouse/application/MicroMouse";
+import { MouseMoveEvent } from "../../micromouse/domain/Events";
 
 
 function sendMessage<T extends CodeRunnerMessage<any>>(message: T) {

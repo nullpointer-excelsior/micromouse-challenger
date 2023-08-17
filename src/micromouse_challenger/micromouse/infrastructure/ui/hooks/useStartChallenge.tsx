@@ -2,8 +2,9 @@ import useStopwatch from "../../../../score/infrastructure/ui/components/stopwat
 import { useScoreState } from "../../../../score/infrastructure/ui/state/score.state"
 import useObservable from "../../../../ui/hooks/useObservable"
 import { eventbus } from "../../../../utils/infrastructure"
-import { MicroMouse, micromouseGame } from "../../../application"
-import { MouseMoveEvent } from "../../../domain"
+import { MicroMouse } from "../../../application/MicroMouse"
+import { micromouseGame } from "../../../application/MicromouseGame"
+import { MouseMoveEvent } from "../../../domain/Events"
 import { useMazeState } from "../state/maze.state"
 
 

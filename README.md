@@ -34,8 +34,9 @@ npm run dev
 - [x] usar el teclado para moverse
 - [x] Eliminar los console.logs en la version productiva 
 - [ ] Mostrar console logs en pagina
-- [ ] ejecutar codigo de desafio en service worker
+- [x] ejecutar codigo de desafio en service worker
 - [ ] despliegue aplicacion
+- [ ] tiempo limite de juego
 
 
 **Desarrollador:** Benjamín 

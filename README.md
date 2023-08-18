@@ -36,7 +36,7 @@ npm run dev
 - [ ] Mostrar console logs en pagina
 - [x] ejecutar codigo de desafio en service worker
 - [ ] despliegue aplicacion
-- [ ] tiempo limite de juego
+- [x] tiempo limite de juego
 - [ ] manejar errores en micrompuse code y worker
 
 **Desarrollador:** Benjamín 

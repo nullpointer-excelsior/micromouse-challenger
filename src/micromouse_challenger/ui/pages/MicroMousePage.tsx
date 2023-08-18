@@ -1,7 +1,7 @@
 import { useMazeState } from "../../micromouse/infrastructure/ui/state/maze.state"
 import Maze from "../../micromouse/infrastructure/ui/components/maze/Maze"
 import MicroMouseControl from "../../micromouse/infrastructure/ui/components/micromouse-control/MicroMouseControl"
-import ScoreDashboard from "../../score/infrastructure/ui/components/score-dashboard/ScoreDashboard"
+// import ScoreDashboard from "../../score/infrastructure/ui/components/score-dashboard/ScoreDashboard"
 import BackHomeButton from "../components/BackHomeButton"
 
 export default function MicroMousePage() {
@@ -16,7 +16,7 @@ export default function MicroMousePage() {
             <Maze />
           </div>
           <div className="p-4">
-            <ScoreDashboard/>
+            {/* <ScoreDashboard/> */}
             <MicroMouseControl />
           </div>
         </div>

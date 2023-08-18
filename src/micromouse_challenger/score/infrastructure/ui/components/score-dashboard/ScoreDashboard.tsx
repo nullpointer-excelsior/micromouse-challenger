@@ -1,12 +1,9 @@
-import { useScoreState } from "../../state/score.state"
 
-export default function ScoreDashboard() {
-
-    const { movements, time } = useScoreState()
+export default function ScoreDashboard({ movements, time  }) {
 
     return (
         <div className="flex justify-center justify-items-center items-center my-4">
-            <div className="text-center">
+            <div>
                 <p className="text-4xl text-green-600 my-2 w-60" > ⏰ { time }</p>
             </div>
             <div className="text-center">

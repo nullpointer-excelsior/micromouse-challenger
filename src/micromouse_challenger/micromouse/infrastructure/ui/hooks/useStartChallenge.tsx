@@ -3,7 +3,7 @@ import { useScoreState } from "../../../../score/infrastructure/ui/state/score.s
 import useObservable from "../../../../ui/hooks/useObservable"
 import { eventbus } from "../../../../utils/infrastructure"
 import { MicroMouse } from "../../../application/MicroMouse"
-import { micromouseGame } from "../../../application/MicromouseGame"
+// import { micromouseGame } from "../../../application/MicromouseGame"
 import { MouseMoveEvent } from "../../../domain/Events"
 import { useMazeState } from "../state/maze.state"
 
@@ -22,19 +22,14 @@ export default function useStartChallenge() {
         updateMousePosition(event.data.position)
         updateMessage(event.data.message)
         incrementMovements()
-        if (event.data.isMoved && micromouseGame.getMicromouse().getCurrentCell().isExit()) {
-            end()
-            alert("Congratulations!! ")
-        }
     }})
 
     return {
         start : (moveDelay = 0) => {
-            const micromouse = MicroMouse.create({
-                matrix: maze,
-                moveDelay: moveDelay
-            })
-            micromouseGame.start(micromouse)
+            // const micromouse = MicroMouse.create({
+            //     matrix: maze,
+            //     moveDelay: moveDelay
+            // })
             start()
         },
         stop: () => {

@@ -1,15 +1,15 @@
 import { filter, fromEventPattern, map, tap } from "rxjs";
 import { eventbus } from "../../utils/infrastructure";
-import { CodeRunnerMessage, MicromouseMoveMessage } from "../domain/CodeRunnerMessage";
+import { CodeRunnerMessage, MicromouseMoveMessage, MicromouseTimeoutMessage, StartMicromouseMessage } from "../domain/CodeRunnerMessage";
 import { MicroMouse } from "../../micromouse/application/MicroMouse";
-import { MouseMoveEvent } from "../../micromouse/domain/Events";
+import { MouseMoveEvent, MouseTimeoutEvent } from "../../micromouse/domain/Events";
 
 
 function sendMessage<T extends CodeRunnerMessage<any>>(message: T) {
   self.postMessage(message)
 }
 
-function executeMicromouseCode(message: CodeRunnerMessage<any>) {
+function executeMicromouseCode(message: StartMicromouseMessage) {
   const micromouse = MicroMouse.create({
     matrix: message.payload.matrix,
     moveDelay: 500
@@ -32,6 +32,15 @@ eventbus
     error: err => console.error(err)
   })
 
+eventbus
+  .onEvent("micromouse.mouse-timeout")
+  .subscribe({
+    next: (event: MouseTimeoutEvent) => {
+      sendMessage(new MicromouseTimeoutMessage(event.data))
+    },
+    error: err => console.error(err)
+  })
+
 const message$ = fromEventPattern(
   handler => self.addEventListener("message", handler),
   handler => self.removeEventListener("message", handler)
@@ -43,9 +52,7 @@ const message$ = fromEventPattern(
 message$.pipe(
   filter(message => message.type === "START_MICROMOUSE")
 ).subscribe({
-  next: (message: CodeRunnerMessage<any>) => {
-    executeMicromouseCode(message)
-  },
+  next: (message: CodeRunnerMessage<any>) => executeMicromouseCode(message),
   error: err => console.log(err)
 })
 

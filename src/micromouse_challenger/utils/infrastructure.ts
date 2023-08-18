@@ -1,6 +1,6 @@
 import { Observable, Subject, filter, iif, tap } from "rxjs";
 import { EventBus, DomainEvent } from "./eventbus";
-import { MicromouseEvent } from "../micromouse/domain";
+import { MicromouseEvent } from "../micromouse/domain/Events";
 
 
 /**

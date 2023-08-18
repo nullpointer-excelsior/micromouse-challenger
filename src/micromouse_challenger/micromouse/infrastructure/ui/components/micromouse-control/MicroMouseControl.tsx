@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ControlButton from "../control-button/ControlButton";
 import PrimaryButton from "../../../../../ui/components/PrimaryButton";
 import useStartChallenge from "../../hooks/useStartChallenge";
-import { micromouseGame } from "../../../../application/MicromouseGame";
+import { MicroMouse } from "../../../../application/MicroMouse";
 
 export default function MicroMouseControl() {
 
@@ -15,11 +15,11 @@ export default function MicroMouseControl() {
       start()
     }
   }
-
-  const onClickUp = async () => micromouseGame.getMicromouse().move('up')
-  const onClickDown = async () => micromouseGame.getMicromouse().move('down')
-  const onClickLeft = async () => micromouseGame.getMicromouse().move('left')
-  const onClickRight = async () => micromouseGame.getMicromouse().move('right')
+  const micromouse = MicroMouse.create(null)
+  const onClickUp = async () => micromouse.move('up')
+  const onClickDown = async () => micromouse.move('down')
+  const onClickLeft = async () => micromouse.move('left')
+  const onClickRight = async () => micromouse.move('right')
 
   useEffect(() => {
     const handleKeyDown = (event) => {

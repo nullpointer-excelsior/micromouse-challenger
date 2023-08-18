@@ -24,7 +24,7 @@ export class CodeRunnerWorker {
         }
         return onMessage$.pipe(filter(m => m.type === type)) 
     }
-
+    
     terminate() {
         this.worker.terminate()
     }

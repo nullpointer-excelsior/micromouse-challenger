@@ -7,7 +7,7 @@ export default function StartCodeChallengeButton(props: { matrix: string[][] }) 
     
     const { matrix } = props
     const [,navigate] = useLocation();
-    const initMaze = useMazeState(state => state.initMaze)
+    const initMaze = useMazeState(state => state.setMaze)
 
     const onClickButton = () => {
         initMaze(matrix)

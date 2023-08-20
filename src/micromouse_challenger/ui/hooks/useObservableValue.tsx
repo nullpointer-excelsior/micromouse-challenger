@@ -16,7 +16,10 @@ export default function useObservableValue<T>(observable$: Observable<T>): Obser
     useEffect(() => {
         const subscription = observable$.subscribe({
             next: (nextValue: T) => setValue(nextValue),
-            error: err => setError(err),
+            error: err => {
+                console.error("useObservableValueError", err)
+                setError(err)
+            },
             complete: () => setIsCompleted(true)
         })
         return () => subscription.unsubscribe()

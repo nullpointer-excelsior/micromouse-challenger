@@ -72,8 +72,8 @@ export class MazeMatrixGenerator {
 
 export class MazeGenerator {
 
-    generate(): Promise<Maze> {
-        const matrix = new MazeMatrixGenerator(30, 30).generate()
+    generate(size = 25): Promise<Maze> {
+        const matrix = new MazeMatrixGenerator(size, size).generate()
         return Promise.resolve(new Maze(matrix))
     }
 

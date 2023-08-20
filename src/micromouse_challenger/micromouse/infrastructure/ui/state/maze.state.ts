@@ -5,7 +5,7 @@ export interface MazeState {
     mousePosition: string;
     maze: string[][];
     updateMousePosition: (position: string) => void;
-    initMaze: (maze: string[][]) => void;
+    setMaze: (maze: string[][]) => void;
     updateMessage: (message: string) => void;
     reset: () => void;
 }
@@ -25,7 +25,7 @@ const defaultState = {
 export const useMazeState = create<MazeState>((set) => ({
    ...defaultState,
     updateMousePosition: (position: string) => set({ mousePosition: position }),
-    initMaze: (maze: string[][]) => set({ maze }),
+    setMaze: (maze: string[][]) => set({ maze }),
     updateMessage: (message: string) => set({ message }),
     reset: () => set({ ...defaultState })
 }))

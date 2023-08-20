@@ -3,8 +3,6 @@ import { useEffect } from "react";
 import { useMazeState } from "../../../../micromouse/infrastructure/ui/state/maze.state";
 import ScoreDashboard from "../../../../score/infrastructure/ui/components/score-dashboard/ScoreDashboard";
 import Maze from "../../../../micromouse/infrastructure/ui/components/maze/Maze";
-import useStopwatch from "../../../../score/infrastructure/ui/components/stopwatch/useStopwatch";
-// import { useScoreState } from "../../../../score/infrastructure/ui/state/score.state";
 import { createCodeRunnerWorker } from "../../../application/createCodeRunnerWorker";
 import { StartMicromouseMessage, MicromouseMoveMessage } from "../../../domain/CodeRunnerMessage";
 import { micromouseGame } from "../../../../micromouse/application/MicromouseGame";
@@ -13,10 +11,7 @@ import useObservableValue from "../../../../ui/hooks/useObservableValue";
 export default function SandBox() {
 
     const { message } = useSandBoxParent()
-    const { updateMessage, updateMousePosition, initMaze } = useMazeState()
-    // const { incrementMovements } = useScoreState()
-    // const { start, end } = useStopwatch()
-
+    const { updateMessage, updateMousePosition, setMaze: initMaze } = useMazeState()
     const [time] = useObservableValue(micromouseGame.time())
     const [movements] = useObservableValue(micromouseGame.movements())
 

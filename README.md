@@ -38,5 +38,6 @@ npm run dev
 - [ ] despliegue aplicacion
 - [x] tiempo limite de juego
 - [ ] manejar errores en micrompuse code y worker
+- [ ] notifications and modal
 
 **Desarrollador:** Benjamín 

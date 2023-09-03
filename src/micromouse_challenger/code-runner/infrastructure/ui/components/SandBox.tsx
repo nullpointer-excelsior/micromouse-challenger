@@ -1,7 +1,7 @@
 import useSandBoxParent from "../hooks/useSandBoxParent";
 import { useEffect } from "react";
 import { useMazeState } from "../../../../micromouse/infrastructure/ui/state/maze.state";
-import ScoreDashboard from "../../../../score/infrastructure/ui/components/score-dashboard/ScoreDashboard";
+import ScoreDashboard from "./ScoreDashboard";
 import Maze from "../../../../micromouse/infrastructure/ui/components/maze/Maze";
 import { createCodeRunnerWorker } from "../../../application/createCodeRunnerWorker";
 import { StartMicromouseMessage, MicromouseMoveMessage } from "../../../domain/CodeRunnerMessage";
@@ -12,8 +12,8 @@ export default function SandBox() {
 
     const { message } = useSandBoxParent()
     const { updateMessage, updateMousePosition, setMaze: initMaze } = useMazeState()
-    const [time] = useObservableValue(micromouseGame.time())
-    const [movements] = useObservableValue(micromouseGame.movements())
+    const [time] = useObservableValue(micromouseGame.time(), "00:00:00")
+    const [movements] = useObservableValue(micromouseGame.movements(), 0)
 
 
     useEffect(() => {

@@ -8,10 +8,16 @@ export class MicromouseGame {
     constructor(private stopwatch: Stopwatch, private state$: ReactiveState<MicromouseGameState> ) { }
 
     start() {
+        this.state$.reset()
         this.stopwatch.start()
     }
 
-    stop() {
+    finish() {
+        this.stopwatch.stop()
+    }
+
+    reset() {
+        this.state$.reset()
         this.stopwatch.stop()
     }
 
@@ -40,6 +46,10 @@ export class MicromouseGame {
             },
             error: err => console.log(err)
         })
+    }
+
+    gameOver() {
+        return this.stopwatch.onStop()
     }
 
     incrementMovements() {

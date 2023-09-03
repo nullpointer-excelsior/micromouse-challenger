@@ -18,25 +18,24 @@ const helpTexts = {
 
 
 export default function CodeRunnerPage() {
-  
+
   const [code, setCode] = useState(getCodeExample())
   const { maze } = useMazeState()
   const [message, setMessage] = useState(null)
   const [showSandbox, setShowSandbox] = useState(false)
   const [btnText, setBtText] = useState("EJECUTAR")
   const [helpText, setHelpText] = useState(helpTexts.editor)
-  
-  const onExecuteMicromouse = () => {
 
+  const onExecuteMicromouse = () => {
     const micromouseCode = createMicromouseCode(code)
-    
     setShowSandbox(!showSandbox)
-    setBtText(!showSandbox? "DETENER" : "EJECUTAR")
-    setHelpText(!showSandbox? helpTexts.sandbox : helpTexts.editor)
+    setBtText(!showSandbox ? "DETENER" : "EJECUTAR")
+    setHelpText(!showSandbox ? helpTexts.sandbox : helpTexts.editor)
     setMessage({
       code: micromouseCode,
       matrix: maze
-  })
+    })
+
   }
 
   const onChangeCode = (value: string, e: any) => setCode(value)
@@ -48,13 +47,14 @@ export default function CodeRunnerPage() {
       </p>
       <div className='flex place-content-center gap-6'>
         <div className="flex justify-center items-center gap-6">
-          { showSandbox? <SandboxIframe message={message}/>: <CodeEditor defaultValue={code} onChange={onChangeCode} />}
+          {showSandbox ? <SandboxIframe message={message} /> : <CodeEditor defaultValue={code} onChange={onChangeCode} />}
         </div>
         <div className="flex flex-col justify-center items-center gap-6 my-8">
-          <PrimaryButton text={btnText} onClick={onExecuteMicromouse} className="w-60" />
-          <BackHomeButton onClick={() => stop()} className="w-60" />
+          <PrimaryButton text={btnText} onClick={onExecuteMicromouse} className="w-40" />
+          <BackHomeButton onClick={() => { }} className="w-40" />
         </div>
       </div>
+
     </>
   )
 }

@@ -15,7 +15,7 @@ export class MicroMouse {
     ) { }
 
     async move(position: 'up' | 'down' | 'left' | 'right'): Promise<MoveMouseResponse> {
-        
+
         await new Promise(resolve => setTimeout(resolve, this.moveDelay));
 
         const response = this.mouse.move(position)

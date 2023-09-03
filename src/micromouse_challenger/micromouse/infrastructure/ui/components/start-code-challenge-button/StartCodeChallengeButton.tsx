@@ -14,6 +14,6 @@ export default function StartCodeChallengeButton(props: { matrix: string[][] }) 
         navigate(Paths.MICROMOUSE_CODERUNNER)
     }
 
-    return <PrimaryButton className="w-80" onClick={onClickButton} text="CODIFICAR DESAFIO"></PrimaryButton>
+    return <PrimaryButton className="w-80" onClick={onClickButton} text="COMENZAR DESAFIO"></PrimaryButton>
 
 }

@@ -18,7 +18,7 @@ export default function BackHomeButton({ onClick, ...rest }) {
 
   return (
     <>
-      <PrimaryButton {...rest} text="VOLVER" onClick={onClickBack} />
+      <PrimaryButton {...rest} text="HOME" onClick={onClickBack} />
     </>
   );
 }

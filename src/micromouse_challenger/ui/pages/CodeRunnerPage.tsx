@@ -38,7 +38,9 @@ export default function CodeRunnerPage() {
 
   }
 
-  const onChangeCode = (value: string, e: any) => setCode(value)
+  const onChangeCode = (value: string) => {
+    setCode(value)
+  }
 
   return (
     <>

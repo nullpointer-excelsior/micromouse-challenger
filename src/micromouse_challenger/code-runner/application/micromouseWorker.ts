@@ -14,6 +14,7 @@ function executeMicromouseCode(message: StartMicromouseMessage) {
     matrix: message.payload.matrix,
     moveDelay: 500
   })
+  micromouse.getCurrentPosition()
   const evalCode = `
     ${message.payload.code}
     play(micromouse)

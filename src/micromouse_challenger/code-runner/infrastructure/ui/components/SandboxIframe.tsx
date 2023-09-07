@@ -1,3 +1,4 @@
+import { Paths } from "../../../../ui/router/utils/paths";
 import { sendMessageToIframe } from "../native-dom";
 
 const iframeId = "sand-box-iframe"
@@ -15,6 +16,6 @@ export default function SandboxIframe(props: { message: IframeMessage }) {
       setTimeout(() => sendMessageToIframe(iframeId, message), 1000)
     }
   
-    return <iframe className='rounded' id={iframeId} onLoad={handleOnLoad} width="800px" height="500px" src="/sandbox"  />;
+    return <iframe className='rounded' id={iframeId} onLoad={handleOnLoad} width="800px" height="500px" src={Paths.SANDBOX} />;
   
   }

@@ -26,7 +26,7 @@ export default function Routing() {
             <Route path={Paths.GENERATE_MAZE} component={GenerateMazeRoute} />
             <Route path={Paths.MICROMOUSE_CODERUNNER} component={CodeRunnerRoute} />
             <Route path={Paths.SANDBOX} component={SandBoxPage} />
-            <Route component={GenerateMazeRoute} />
+            {/* <Route component={GenerateMazeRoute} /> */}
         </Switch>
     )
 }

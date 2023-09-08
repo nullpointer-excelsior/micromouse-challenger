@@ -7,6 +7,9 @@ import { createCodeRunnerWorker } from "../../../application/createCodeRunnerWor
 import { StartMicromouseMessage, MicromouseMoveMessage } from "../../../domain/CodeRunnerMessage";
 import { micromouseGame } from "../../../../micromouse/application/MicromouseGame";
 import useObservableValue from "../../../../ui/hooks/useObservableValue";
+import getGameConfiguration from "../../../application/getGameConfiguration";
+
+const configuration = getGameConfiguration()
 
 export default function SandBox() {
 
@@ -25,7 +28,7 @@ export default function SandBox() {
             const worker = createCodeRunnerWorker()
 
             micromouseGame.start()
-            micromouseGame.stopGameAt("00:05")
+            micromouseGame.stopGameAt(configuration.gameTimeout)
             micromouseGame.onGameOver(() => worker.terminate())
 
             worker.sendMessage(new StartMicromouseMessage(message))

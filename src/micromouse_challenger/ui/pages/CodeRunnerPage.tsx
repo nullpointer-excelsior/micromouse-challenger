@@ -2,10 +2,10 @@ import PrimaryButton from '../components/PrimaryButton';
 import { useState } from 'react';
 import CodeEditor from '../../code-runner/infrastructure/ui/components/CodeEditor';
 import { useMazeState } from '../../micromouse/infrastructure/ui/state/maze.state';
-import SandboxIframe from '../../code-runner/infrastructure/ui/components/SandboxIframe';
 import BackHomeButton from '../components/BackHomeButton';
 import { getCodeExample } from '../../code-runner/application/getCodeExample';
 import { createMicromouseCode } from '../../code-runner/application/createMicromouseCode';
+import SandBox from '../../code-runner/infrastructure/ui/components/SandBox';
 
 
 const helpTexts = {
@@ -49,7 +49,7 @@ export default function CodeRunnerPage() {
       </p>
       <div className='flex place-content-center gap-6'>
         <div className="flex justify-center items-center gap-6">
-          {showSandbox ? <SandboxIframe message={message} /> : <CodeEditor defaultValue={code} onChange={onChangeCode} />}
+          {showSandbox ? <SandBox message={message} /> : <CodeEditor defaultValue={code} onChange={onChangeCode} />}
         </div>
         <div className="flex flex-col justify-center items-center gap-6 my-8">
           <PrimaryButton text={btnText} onClick={onExecuteMicromouse} className="w-40" />

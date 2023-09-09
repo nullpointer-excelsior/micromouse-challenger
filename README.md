@@ -35,9 +35,10 @@ npm run dev
 - [x] Eliminar los console.logs en la version productiva 
 - [ ] Mostrar console logs en pagina
 - [x] ejecutar codigo de desafio en service worker
-- [ ] despliegue aplicacion
+- [x] despliegue aplicacion
 - [x] tiempo limite de juego
 - [ ] manejar errores en micrompuse code y worker
 - [ ] notifications and modal
+- [x] variables de ambiente para diferenciar prod de dev
 
 **Desarrollador:** Benjamín 

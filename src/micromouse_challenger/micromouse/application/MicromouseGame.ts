@@ -1,7 +1,8 @@
-import { filter } from "rxjs";
+import { Observable, filter, map } from "rxjs";
 import { Stopwatch } from "../../utils/stopwatch";
 import { ReactiveState } from "../../utils/reactive-state";
 import { MicromouseGameState } from "../domain/state/MicromouseGameState";
+import { GameOverResponse } from "../dto";
 
 export class MicromouseGame {
 
@@ -48,8 +49,12 @@ export class MicromouseGame {
         })
     }
 
-    gameOver() {
-        return this.stopwatch.onStop()
+    gameOver(): Observable<GameOverResponse> {
+        return this.stopwatch.onStop().pipe(
+            map(() => ({
+                isWinner: this.state$.snapshot().isWinner
+            }))
+        )
     }
 
     incrementMovements() {

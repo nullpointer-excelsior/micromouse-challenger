@@ -38,7 +38,7 @@ npm run dev
 - [x] despliegue aplicacion
 - [x] tiempo limite de juego
 - [ ] manejar errores en micrompuse code y worker
-- [ ] notifications and modal
+- [x] notifications and modal
 - [x] variables de ambiente para diferenciar prod de dev
 
 **Desarrollador:** Benjamín 

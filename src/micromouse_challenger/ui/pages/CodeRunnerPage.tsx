@@ -56,7 +56,6 @@ export default function CodeRunnerPage() {
           <BackHomeButton onClick={() => { }} className="w-40" />
         </div>
       </div>
-
     </>
   )
 }

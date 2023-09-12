@@ -2,7 +2,7 @@ import { Observable, filter, map } from "rxjs";
 import { Stopwatch } from "../../utils/stopwatch";
 import { ReactiveState } from "../../utils/reactive-state";
 import { MicromouseGameState } from "../domain/state/MicromouseGameState";
-import { GameOverResponse } from "../dto";
+import { GameOverResponse, SetupGame } from "../dto";
 
 export class MicromouseGame {
 
@@ -68,6 +68,19 @@ export class MicromouseGame {
         return this.state$.listenTo(state => state.movements)
     }
 
+    setup(params: SetupGame) {
+        this.state$.reduce(state => ({
+            ...state,
+            ...params
+        }))
+    }
+
+    getSetup(): SetupGame {
+        return {
+            code: this.state$.snapshot().code,
+            matrix: this.state$.snapshot().matrix
+        }
+    }
 }
 
 
@@ -77,7 +90,9 @@ export const micromouseGame = new MicromouseGame(
     new ReactiveState({
         isWinner: false,
         movements: 0,
-        time: "00:00:00"
+        time: "00:00:00",
+        code: "// you must to code a solution for Micromouse Challenge",
+        matrix: [[]]
     })
 )
 

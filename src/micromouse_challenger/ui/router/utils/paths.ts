@@ -5,4 +5,5 @@ export const Paths = {
     HOME: `${BASE_URL}home`,
     GENERATE_MAZE: `${BASE_URL}generate-maze`,
     MICROMOUSE_CODERUNNER: `${BASE_URL}code-runner`,
+    MICROMOUSE_SANDBOX: `${BASE_URL}code-sandbox`,
 }

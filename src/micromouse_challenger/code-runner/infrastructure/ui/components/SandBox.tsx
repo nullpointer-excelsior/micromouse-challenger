@@ -25,7 +25,7 @@ export default function SandBox({ message }: { message: MicromouseMessage }) {
     const { updateMessage, updateMousePosition, setMaze } = useMazeState()
     const [time] = useObservableValue(micromouseGame.time(), "00:00:00")
     const [movements] = useObservableValue(micromouseGame.movements(), 0)
-    const [gameOver] = useObservableValue(micromouseGame.gameOver(), { isWinner: true })
+    const [gameOver] = useObservableValue(micromouseGame.gameOver(), { isWinner: false })
     const [,navigate] = useLocation();
 
     const [open, setOpen] = useState(false)
@@ -65,6 +65,7 @@ export default function SandBox({ message }: { message: MicromouseMessage }) {
 
     const onGameOver = () => {
         setOpen(false)
+        navigate(Paths.MICROMOUSE_CODERUNNER)
     }
 
 

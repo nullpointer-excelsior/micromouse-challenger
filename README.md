@@ -25,7 +25,7 @@ npm run dev
 - [x] generacion de laberintos complejos
 - [x] ordenar directorios y archivos
 - [ ] ejemplo de algoritmo basico para la resolucion del laberinto
-- [ ] documentar APIs basicas Mouse, MouseResponses
+- [x] documentar APIs basicas Mouse, MouseResponses
 - [x] agregar retrasos de tiempo en las operaciones del ratoncito
 - [x] migrar a typescript
 - [x] generar web del juego en React u otro parecido

@@ -1,8 +1,8 @@
 import MazeView from "../maze-view/MazeView"
-import { mazeGenerator } from "../../../../application"
 import { useMazeGeneratorState } from "../../state/maze-generator.state"
 import PrimaryButton from "../../../../../ui/components/PrimaryButton"
 import { useEffect } from "react"
+import { mazeGenerator } from "../../../services"
 
 
 export default function MazeGenerator() {

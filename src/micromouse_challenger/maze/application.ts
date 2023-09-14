@@ -78,5 +78,3 @@ export class MazeGenerator {
     }
 
 }
-
-export const mazeGenerator = new MazeGenerator()

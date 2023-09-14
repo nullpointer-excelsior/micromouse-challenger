@@ -2,8 +2,8 @@ import { useLocation } from "wouter";
 import SandBox from "../../code-runner/infrastructure/ui/components/SandBox";
 import PrimaryButton from "../components/PrimaryButton";
 import BackHomeButton from "../components/BackHomeButton";
-import { micromouseGame } from "../../micromouse/application/MicromouseGame";
 import { Paths } from "../router/utils/paths";
+import { micromouseGame } from "../../micromouse/infrastructure/services";
 
 export default function SandBoxPage() {
 

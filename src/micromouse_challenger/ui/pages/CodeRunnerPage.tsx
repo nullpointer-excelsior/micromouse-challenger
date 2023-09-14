@@ -5,9 +5,9 @@ import { useMazeState } from '../../micromouse/infrastructure/ui/state/maze.stat
 import BackHomeButton from '../components/BackHomeButton';
 import { getCodeExample } from '../../code-runner/application/getCodeExample';
 import { createMicromouseCode } from '../../code-runner/application/createMicromouseCode';
-import { micromouseGame } from '../../micromouse/application/MicromouseGame';
 import { useLocation } from 'wouter';
 import { Paths } from '../router/utils/paths';
+import { micromouseGame } from '../../micromouse/infrastructure/services';
 
 
 export default function CodeRunnerPage() {

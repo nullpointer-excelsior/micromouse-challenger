@@ -5,7 +5,6 @@ import ConfettiExplosion from 'react-confetti-explosion';
 import Maze from "../../../../micromouse/infrastructure/ui/components/maze/Maze";
 import { createCodeRunnerWorker } from "../../../application/createCodeRunnerWorker";
 import { StartMicromouseMessage, MicromouseMoveMessage } from "../../../domain/CodeRunnerMessage";
-import { micromouseGame } from "../../../../micromouse/application/MicromouseGame";
 import useObservableValue from "../../../../ui/hooks/useObservableValue";
 import getGameConfiguration from "../../../application/getGameConfiguration";
 import Modal from "../../../../ui/components/Modal";
@@ -13,6 +12,7 @@ import GameOverModalContent from "./GameOverModalContent";
 import WinnerModalContent from "./WinnerModalContent";
 import { useLocation } from "wouter";
 import { Paths } from "../../../../ui/router/utils/paths";
+import { micromouseGame } from "../../../../micromouse/infrastructure/services";
 
 export interface MicromouseMessage {
     matrix: string[][];

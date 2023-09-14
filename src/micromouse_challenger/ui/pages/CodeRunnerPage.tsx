@@ -3,16 +3,16 @@ import { useState } from 'react';
 import CodeEditor from '../../code-runner/infrastructure/ui/components/CodeEditor';
 import { useMazeState } from '../../micromouse/infrastructure/ui/state/maze.state';
 import BackHomeButton from '../components/BackHomeButton';
-import { getCodeExample } from '../../code-runner/application/getCodeExample';
 import { createMicromouseCode } from '../../code-runner/application/createMicromouseCode';
 import { useLocation } from 'wouter';
 import { Paths } from '../router/utils/paths';
 import { micromouseGame } from '../../micromouse/infrastructure/services';
+import { useCodeRunnerPageState } from '../state/code-runner-page.state';
 
 
 export default function CodeRunnerPage() {
 
-  const [code, setCode] = useState(getCodeExample())
+  const {code, setCode} = useCodeRunnerPageState()
   const { maze } = useMazeState()
   const [,navigate] = useLocation();
 

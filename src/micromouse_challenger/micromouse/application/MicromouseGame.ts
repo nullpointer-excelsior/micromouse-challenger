@@ -1,5 +1,5 @@
-import { BehaviorSubject, Observable, Subject, filter, map } from "rxjs";
 import { Stopwatch } from "../../utils/stopwatch";
+import { Observable, filter, map } from "rxjs";
 import { ReactiveState } from "../../utils/reactive-state";
 import { MicromouseGameState } from "../domain/state/MicromouseGameState";
 import { GameOverResponse, SetupGame } from "../dto";

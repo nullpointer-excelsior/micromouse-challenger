@@ -1,8 +1,8 @@
 import { filter, fromEventPattern, map, tap } from "rxjs";
 import { eventbus } from "../../utils/infrastructure";
-import { CodeRunnerMessage, MicromouseMoveMessage, MicromouseTimeoutMessage, StartMicromouseMessage } from "../domain/CodeRunnerMessage";
+import { CodeRunnerMessage, MicromouseMoveMessage, MicromouseTimeoutMessage, MicromouseWinMessage, StartMicromouseMessage } from "../domain/CodeRunnerMessage";
 import { MicroMouse } from "../../micromouse/application/MicroMouse";
-import { MouseMoveEvent, MouseTimeoutEvent } from "../../micromouse/domain/Events";
+import { MouseMoveEvent, MouseTimeoutEvent, MouseWinEvent } from "../../micromouse/domain/Events";
 
 
 function sendMessage<T extends CodeRunnerMessage<any>>(message: T) {
@@ -29,6 +29,15 @@ eventbus
   .subscribe({
     next: (event: MouseMoveEvent) => {
       sendMessage(new MicromouseMoveMessage({ micromouseEvent: event }))
+    },
+    error: err => console.error(err)
+  })
+
+eventbus
+  .onEvent<MouseWinEvent>("micromouse.mouse-win")
+  .subscribe({
+    next: (event: MouseWinEvent) => {
+      sendMessage(new MicromouseWinMessage({ micromouseEvent: event}))
     },
     error: err => console.error(err)
   })

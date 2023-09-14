@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useMazeState } from "../../../../micromouse/infrastructure/ui/state/maze.state";
 import ScoreDashboard from "./ScoreDashboard";
+import ConfettiExplosion from 'react-confetti-explosion';
 import Maze from "../../../../micromouse/infrastructure/ui/components/maze/Maze";
 import { createCodeRunnerWorker } from "../../../application/createCodeRunnerWorker";
 import { StartMicromouseMessage, MicromouseMoveMessage } from "../../../domain/CodeRunnerMessage";
@@ -56,6 +57,13 @@ export default function SandBox({ message }: { message: MicromouseMessage }) {
                 error: (err) => console.log(err)
             })
 
+            worker.onMessage<MicromouseMoveMessage>("MICROMOUSE_WIN").subscribe({
+                next: () => {
+                    micromouseGame.win()
+                },
+                error: (err) => console.log(err)
+            })
+
             return () => {
                 worker.terminate()
             }
@@ -83,8 +91,9 @@ export default function SandBox({ message }: { message: MicromouseMessage }) {
                 <ScoreDashboard time={time} movements={movements} />
                 <Maze />
                 <Modal title={ gameOver.isWinner? "Felicitaciones" : "Que penita"} open={open} onAccept={onGameOver} onClose={onGameOver}>
-                   { gameOver.isWinner?  <WinnerModalContent/> : <GameOverModalContent /> }
+                   { gameOver.isWinner?  <WinnerModalContent movements={movements} time={time}/> : <GameOverModalContent /> }
                 </Modal>
+                { gameOver.isWinner ? <ConfettiExplosion zIndex={1000} />: null }
             </div>
         </div>
     )

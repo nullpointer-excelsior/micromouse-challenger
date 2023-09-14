@@ -1,4 +1,4 @@
-import { Observable, filter, map } from "rxjs";
+import { BehaviorSubject, Observable, Subject, filter, map } from "rxjs";
 import { Stopwatch } from "../../utils/stopwatch";
 import { ReactiveState } from "../../utils/reactive-state";
 import { MicromouseGameState } from "../domain/state/MicromouseGameState";
@@ -81,6 +81,15 @@ export class MicromouseGame {
             matrix: this.state$.snapshot().matrix
         }
     }
+
+    win() {
+        this.state$.reduce(state => ({
+            ...state,
+            isWinner: true,
+        }))
+        this.finish()
+    }
+
 }
 
 

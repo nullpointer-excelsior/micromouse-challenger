@@ -1,6 +1,6 @@
-import { MouseMoveEvent } from "../../micromouse/domain/Events"
+import { MouseMoveEvent, MouseWinEvent } from "../../micromouse/domain/Events"
 
-export type CodeRunnerMessageType =  'START_MICROMOUSE' | 'WORKER' | 'MICROMOUSE_MOVE' | 'MICROMOUSE_TIMEOUT'
+export type CodeRunnerMessageType =  'START_MICROMOUSE' | 'WORKER' | 'MICROMOUSE_MOVE' | 'MICROMOUSE_TIMEOUT' | 'MICROMOUSE_WIN'
 
 export abstract class CodeRunnerMessage<T> {
     abstract type: CodeRunnerMessageType
@@ -17,6 +17,10 @@ export class StartMicromouseMessage extends CodeRunnerMessage<{ code: string, ma
 
 export class MicromouseMoveMessage extends CodeRunnerMessage<{ micromouseEvent: MouseMoveEvent }> {
     type: CodeRunnerMessageType = "MICROMOUSE_MOVE"
+}
+
+export class MicromouseWinMessage extends CodeRunnerMessage<{ micromouseEvent: MouseWinEvent }> {
+    type: CodeRunnerMessageType = "MICROMOUSE_WIN"
 }
 
 export class MicromouseTimeoutMessage extends CodeRunnerMessage<string> {

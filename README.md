@@ -40,5 +40,6 @@ npm run dev
 - [ ] manejar errores en micrompuse code y worker
 - [x] notifications and modal
 - [x] variables de ambiente para diferenciar prod de dev
+- [ ] save code in localstorage
 
 **Desarrollador:** Benjamín 

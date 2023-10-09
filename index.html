@@ -1,13 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>🐭 MicroMouse Challenge</title>
-  </head>
-  <body class="bg-gray-900">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🐭 MicroMouse Challenge</title>
+</head>
+
+<body class="font-Poppins bg-gray-900">
+  <!-- Header -->
+  <header>
+    <nav class="container flex items-center py-4 mt-4 sm:mt-12">
+      <div class="py-1 text-white text-2xl font-semibold">MicroMouse Challenger 🐁 </div>
+      <ul class="hidden sm:flex flex-1 justify-end items-center gap-12 text-orange-300 uppercase text-xs">
+        <li class="cursor-pointer">Contact</li>
+        <li class="cursor-pointer">Github</li>
+      </ul>
+      <div class="flex sm:hidden flex-1 justify-end">
+        <i class="text-2xl fas fa-bars"></i>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative">
+    <div class="container flex flex-col-reverse lg:flex-row items-center gap-12 mt-14 lg:mt-28">
+      <!-- Content -->
+      <div class="flex flex-1 flex-col items-center lg:items-start">
+        <h2 class="text-orange-300 text-3xl md:text-4 lg:text-5xl text-center lg:text-left mb-6">
+          MicroMouse Challenger
+        </h2>
+        <p class="text-bookmark-grey text-lg text-center lg:text-left mb-6">
+          La emocionante competencia de Micromouse ha capturado la atención de miles de entusiastas de la robótica,
+          siendo un desafío que requiere una destreza excepcional en hardware. Ahora, te presentamos un fascinante reto
+          diseñado especialmente para desarrolladores apasionados como tú.
+        </p>
+        <div class="flex justify-center flex-wrap gap-6">
+          <button type="button" class="bg-purple-500 hover:bg-purple-700 text-white py-2 px-4 rounded shadow-lg">
+            Historia MicroMouse
+          </button>
+          <button type="button"
+            class="text-white shadow-md py-2 px-4 rounded-md transition duration-300 border-purple-700 border-2 hover:bg-purple-700 hover:text-white">
+            Empezar
+          </button>
+        </div>
+      </div>
+      <!-- Image -->
+      <div class="flex justify-center flex-1 mb-10 md:mb-16 lg:mb-0 z-10">
+        <img class="w-5/6 h-5/6 sm:w-3/4 sm:h-3/4 md:w-full md:h-full" src="./imgs/hero-bg.png" alt="" />
+      </div>
+    </div>
+    <!-- Rounded Rectangle -->
+    <div class="
+          hidden
+          md:block
+          overflow-hidden
+          bg-bookmark-purple
+          rounded-l-full
+          absolute
+          h-80
+          w-2/4
+          top-32
+          right-0
+          lg:
+          -bottom-28
+          lg:-right-36
+        "></div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-20 mt-20 lg:mt-60">
+    <!-- Heading -->
+    <div class="sm:w-3/4 lg:w-5/12 mx-auto px-2">
+      <h1 class="text-3xl text-center text-orange-300">Reglas</h1>
+      <p class="text-center text-bookmark-grey mt-4">
+        Tu tarea consistirá en desarrollar un algoritmo en TypeScript que asista al ratoncito en su misión de encontrar
+        la salida en un laberinto.
+        El ratón dispondrá de un tiempo límite de 5 minutos para alcanzar la salida.
+      </p>
+    </div>
+    <!-- Feature #1 -->
+    <div class="relative mt-20 lg:mt-24">
+      <div class="container flex flex-col lg:flex-row items-center justify-center gap-x-24">
+        <!-- Image -->
+        <div class="flex flex-1 justify-center z-10 mb-10 lg:mb-0">
+          <img class="w-5/6 h-5/6 sm:w-3/4 sm:h-3/4 md:w-full md:h-full" src="./imgs/illustration-features-tab-1.png"
+            alt="" />
+        </div>
+        <!-- Content -->
+        <div class="flex flex-1 flex-col items-center lg:items-start">
+          <h1 class="text-3xl text-orange-300">Editor de codigo integrado</h1>
+          <p class="text-bookmark-grey my-4 text-center lg:text-left sm:w-3/4 lg:w-full">
+            Utiliza el editor de código incorporado en la página para poner a prueba tu algoritmo.
+          </p>
+          <!-- <button type="button" class="btn btn-purple hover:bg-bookmark-white hover:text-black">Empezar</button> -->
+        </div>
+      </div>
+      <!-- Rounded Rectangle -->
+      <div class="
+            hidden
+            lg:block
+            overflow-hidden
+            bg-bookmark-purple
+            rounded-r-full
+            absolute
+            h-80
+            w-2/4
+            -bottom-24
+            -left-36
+          "></div>
+    </div>
+    <!-- Feature #2 -->
+    <div class="relative mt-20 lg:mt-52">
+      <div class="container flex flex-col lg:flex-row-reverse items-center justify-center gap-x-24">
+        <!-- Image -->
+        <div class="flex flex-1 justify-center z-10 mb-10 lg:mb-0">
+          <img class="w-5/6 h-5/6 sm:w-3/4 sm:h-3/4 md:w-full md:h-full" src="./imgs/illustration-features-tab-2.png"
+            alt="" />
+        </div>
+        <!-- Content -->
+        <div class="flex flex-1 flex-col items-center lg:items-start">
+          <h1 class="text-3xl text-orange-300">Generación de laberinto aleatorio</h1>
+          <p class="text-bookmark-grey my-4 text-center lg:text-left sm:w-3/4 lg:w-full">
+            Puedes generar un laberinto aleatorio para poder jugar.
+          </p>
+          <!-- <button type="button" class="btn btn-purple hover:bg-bookmark-white hover:text-black">More Info</button> -->
+        </div>
+      </div>
+      <!-- Rounded Rectangle -->
+      <div class="
+            hidden
+            lg:block
+            overflow-hidden
+            bg-bookmark-purple
+            rounded-l-full
+            absolute
+            h-80
+            w-2/4
+            -bottom-24
+            -right-36
+          "></div>
+    </div>
+    <!-- Feature #3 -->
+    <div class="relative mt-20 lg:mt-52">
+      <div class="container flex flex-col lg:flex-row items-center justify-center gap-x-24">
+        <!-- Image -->
+        <div class="flex flex-1 justify-center z-10 mb-10 lg:mb-0">
+          <img class="w-5/6 h-5/6 sm:w-3/4 sm:h-3/4 md:w-full md:h-full" src="./imgs/illustration-features-tab-3.png"
+            alt="" />
+        </div>
+        <!-- Content -->
+        <div class="flex flex-1 flex-col items-center lg:items-start">
+          <h1 class="text-3xl text-orange-300">Visualiza el repositorio</h1>
+          <p class="text-bookmark-grey my-4 text-center lg:text-left sm:w-3/4 lg:w-full">
+            Este proyecto se llevó a cabo con el propósito de implementar una aplicación web React utilizando
+            la arquitectura limpia. Además, nos aventuramos en el emocionante mundo de la programación reactiva con
+            RxJS,
+            lo que nos brinda la capacidad de manejar flujos asincrónicos complejos con facilidad.
+            Te extendemos una cordial invitación a clonar este proyecto y agregar las características que desees,
+            lo que te permitirá elevar tu nivel de competencia en el ámbito de la arquitectura de software. Esta
+            iniciativa está especialmente dirigida a aquellos con muchas ganas de aprender y un interés en el desarrollo
+            web.
+          </p>
+          <button type="button"
+            class="bg-purple-500 hover:bg-purple-700 text-white py-2 px-4 rounded shadow-lg">Repositorio</button>
+        </div>
+      </div>
+      <!-- Rounded Rectangle -->
+      <div class="
+            hidden
+            lg:block
+            overflow-hidden
+            bg-bookmark-purple
+            rounded-r-full
+            absolute
+            h-80
+            w-2/4
+            -bottom-24
+            -left-36
+          "></div>
+    </div>
+  </section>
+
+  <!-- Start challenger -->
+  <section class="py-20 mt-20">
+
+    <div class="container grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-16 max-w-screen-lg mt-16">
+      <!-- REACT RENDERING -->
+      <!-- <div id="root"></div> -->
+      <!-- Card start -->
+      <div class="flex flex-col rounded-md shadow-md lg:my-8">
+        <div class="p-6 flex flex-col items-center">
+          <img src="./imgs/mouse-logo.svg" width="150" height="150" alt="" class="fill-pink-500" />
+          <h3 class="mt-5 mb-2 text-orange-300 text-3xl">Empezar el Desafio</h3>
+          <p class="text-center text-bookmark-grey mt-4 mb-2">
+            Ahora que estás familiarizado con el desafío MicroMouse Challenger, te invitamos a unirte y ayudar a
+            nuestro ratoncito. Pon a prueba tus conocimientos en programación y crea el algoritmo
+            más adecuado para superar este emocionante desafío
+          </p>
+        </div>
+        <hr class="border-b border-bookmark-white" />
+        <div class="flex justify-center items-center p-6">
+          <button type="button" class="bg-purple-500 hover:bg-purple-700 text-white py-2 px-4 rounded shadow-lg">
+            Ir a MicroMouse
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-bookmark-blue py-8 text-white">
+    <div class="container flex flex-col md:flex-row items-center">
+      <p className="font-normal text-center text-[18px] leading-[27px] ">
+        Copyright Ⓒ 2023 Micromouse. All Rights Reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>

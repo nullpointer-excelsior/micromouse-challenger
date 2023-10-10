@@ -10,7 +10,7 @@ export default function LandingPage() {
         location(Paths.GENERATE_MAZE)
     }
 
-    const handleCliclMicromouse  = (e) => {
+    const handleCliclMicromouse  = () => {
         window.open('https://www.youtube.com/watch?v=IDiuQNmKOdo', '_blank')
     }
 

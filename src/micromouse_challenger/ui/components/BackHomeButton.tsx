@@ -1,6 +1,7 @@
 import { useLocation } from "wouter";
 import PrimaryButton from "./PrimaryButton";
 import { useMazeState } from "../../micromouse/infrastructure/ui/state/maze.state";
+import { Paths } from "../router/utils/paths";
 
 export default function BackHomeButton({ onClick, ...rest }) {
 
@@ -10,7 +11,7 @@ export default function BackHomeButton({ onClick, ...rest }) {
   const onClickBack = () => {
     onClick()
     resetMazeState()
-    location("/")
+    location(Paths.GENERATE_MAZE)
   }
 
   return (

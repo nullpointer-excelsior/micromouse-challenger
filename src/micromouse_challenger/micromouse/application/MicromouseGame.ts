@@ -82,6 +82,12 @@ export class MicromouseGame {
         }
     }
 
+    getSetup$(): Observable<SetupGame> {
+        return this.state$.listen().pipe(
+            map(state => ({ code: state.code, matrix: state.matrix }))
+        )
+    }
+
     win() {
         this.state$.reduce(state => ({
             ...state,

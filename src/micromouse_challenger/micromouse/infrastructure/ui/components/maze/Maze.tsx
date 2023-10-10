@@ -1,5 +1,7 @@
+import { map } from 'rxjs';
+import useObservableValue from '../../../../../ui/hooks/useObservableValue';
 import { MouseMaze } from '../../../../domain/MouseMaze';
-import { useMazeState } from '../../state/maze.state';
+import { mazeState } from '../../../services';
 import CellContent from './CellContent';
 
 function Cell({cell, mousePosition }) {
@@ -16,8 +18,8 @@ function Cell({cell, mousePosition }) {
 
 export default function Maze({ ...rest }) {
  
-    const { mousePosition, maze } = useMazeState()
-    const cells = MouseMaze.mapMatrixToCells(maze)
+    const [cells] = useObservableValue(mazeState.onMaze().pipe(map(m => MouseMaze.mapMatrixToCells(m))),[[]])
+    const [mousePosition] = useObservableValue(mazeState.onMousePosition(), "A0")
 
     return (
         <div className="flex flex-col items-center border-slate-500 border-8 rounded" {...rest}>

@@ -33,11 +33,9 @@ function SandboxRoute() {
 export default function Routing() {
     return (
         <Switch>
-            {/* <Route path={Paths.ROOT} component={LandingPage} /> */}
             <Route path={Paths.GENERATE_MAZE} component={GenerateMazeRoute} />
             <Route path={Paths.MICROMOUSE_CODERUNNER} component={CodeRunnerRoute} />
             <Route path={Paths.MICROMOUSE_SANDBOX} component={SandboxRoute} />
-            {/* <Route component={GenerateMazeRoute} /> */}
             <Route component={LandingPage} />
         </Switch>
     )

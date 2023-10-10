@@ -3,14 +3,21 @@ import { Observable, filter, map } from "rxjs";
 import { ReactiveState } from "../../utils/reactive-state";
 import { MicromouseGameState } from "../domain/state/MicromouseGameState";
 import { GameOverResponse, SetupGame } from "../dto";
+import { MazeState } from "../domain/state/MazeState";
 
 export class MicromouseGame {
 
-    constructor(private stopwatch: Stopwatch, private state$: ReactiveState<MicromouseGameState> ) { }
+    constructor(
+        private stopwatch: Stopwatch, 
+        private gameState$: ReactiveState<MicromouseGameState>,
+        private mazeState$: MazeState
+    ) { }
 
-    start() {
-        this.state$.reset()
+    start(params: { maze: string[][], stopGameAt: `${number}:${number}`}) {
+        this.gameState$.reset()
         this.stopwatch.start()
+        this.mazeState$.setMaze(params.maze)
+        this.stopGameAt(params.stopGameAt)
     }
 
     finish() {
@@ -18,7 +25,7 @@ export class MicromouseGame {
     }
 
     reset() {
-        this.state$.reset()
+        this.gameState$.reset()
         this.stopwatch.stop()
     }
 
@@ -32,7 +39,7 @@ export class MicromouseGame {
             .pipe(filter(timeValue => timeValue === `${time}:00`))
             .subscribe((time: string) => {
                 this.stopwatch.stop()
-                this.state$.update({
+                this.gameState$.update({
                     time: time,
                     isWinner: false
                 })
@@ -52,24 +59,26 @@ export class MicromouseGame {
     gameOver(): Observable<GameOverResponse> {
         return this.stopwatch.onStop().pipe(
             map(() => ({
-                isWinner: this.state$.snapshot().isWinner
+                isWinner: this.gameState$.snapshot().isWinner
             }))
         )
     }
 
-    incrementMovements() {
-        this.state$.reduce(state => ({
+    updateScore(params: { message: string, position: string}) {
+        this.mazeState$.updateMousePosition(params.position)
+        this.mazeState$.updateMessage(params.message)
+        this.gameState$.reduce(state => ({
             ...state,
             movements: state.movements + 1
         }))
     }
 
     movements() {
-        return this.state$.listenTo(state => state.movements)
+        return this.gameState$.listenTo(state => state.movements)
     }
 
     setup(params: SetupGame) {
-        this.state$.reduce(state => ({
+        this.gameState$.reduce(state => ({
             ...state,
             ...params
         }))
@@ -77,19 +86,19 @@ export class MicromouseGame {
 
     getSetup(): SetupGame {
         return {
-            code: this.state$.snapshot().code,
-            matrix: this.state$.snapshot().matrix
+            code: this.gameState$.snapshot().code,
+            matrix: this.gameState$.snapshot().matrix
         }
     }
 
     getSetup$(): Observable<SetupGame> {
-        return this.state$.listen().pipe(
+        return this.gameState$.listen().pipe(
             map(state => ({ code: state.code, matrix: state.matrix }))
         )
     }
 
     win() {
-        this.state$.reduce(state => ({
+        this.gameState$.reduce(state => ({
             ...state,
             isWinner: true,
         }))

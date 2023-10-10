@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useMazeState } from "../../../../micromouse/infrastructure/ui/state/maze.state";
 import ScoreDashboard from "./ScoreDashboard";
 import ConfettiExplosion from 'react-confetti-explosion';
 import Maze from "../../../../micromouse/infrastructure/ui/components/maze/Maze";
@@ -13,6 +12,7 @@ import WinnerModalContent from "./WinnerModalContent";
 import { useLocation } from "wouter";
 import { Paths } from "../../../../ui/router/utils/paths";
 import { micromouseGame } from "../../../../micromouse/infrastructure/services";
+import { map } from "rxjs";
 
 export interface MicromouseMessage {
     matrix: string[][];
@@ -23,7 +23,6 @@ const configuration = getGameConfiguration()
 
 export default function SandBox({ message }: { message: MicromouseMessage }) {
 
-    const { updateMessage, updateMousePosition, setMaze } = useMazeState()
     const [time] = useObservableValue(micromouseGame.time(), "00:00:00")
     const [movements] = useObservableValue(micromouseGame.movements(), 0)
     const [gameOver] = useObservableValue(micromouseGame.gameOver(), { isWinner: false })
@@ -35,12 +34,13 @@ export default function SandBox({ message }: { message: MicromouseMessage }) {
 
         if (message) {
 
-            setMaze(message.matrix)
-
             const worker = createCodeRunnerWorker()
 
-            micromouseGame.start()
-            micromouseGame.stopGameAt(configuration.gameTimeout)
+            micromouseGame.start({
+                maze: message.matrix,
+                stopGameAt: configuration.gameTimeout
+            })
+            
             micromouseGame.onGameOver(() => {
                 worker.terminate()
                 setOpen(true)
@@ -48,11 +48,15 @@ export default function SandBox({ message }: { message: MicromouseMessage }) {
 
             worker.sendMessage(new StartMicromouseMessage(message))
 
-            worker.onMessage<MicromouseMoveMessage>("MICROMOUSE_MOVE").subscribe({
-                next: (x) => {
-                    updateMousePosition(x.payload.micromouseEvent.data.position)
-                    updateMessage(x.payload.micromouseEvent.data.message)
-                    micromouseGame.incrementMovements()
+            worker
+                .onMessage<MicromouseMoveMessage>("MICROMOUSE_MOVE")
+                .pipe(map(event => event.payload.micromouseEvent))
+                .subscribe({
+                next: (micromouseEvent) => {
+                    micromouseGame.updateScore({
+                        message: micromouseEvent.data.message,
+                        position: micromouseEvent.data.position
+                    })
                 },
                 error: (err) => console.log(err)
             })

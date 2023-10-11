@@ -1,7 +1,7 @@
 import { useLocation } from "wouter";
 import PrimaryButton from "../../../../../ui/components/PrimaryButton";
 import { Paths } from "../../../../../ui/router/utils/paths";
-import { mazeState } from "../../../services";
+import { micromouseState } from "../../../services";
 
 export default function StartCodeChallengeButton(props: { matrix: string[][] }) {
     
@@ -9,7 +9,7 @@ export default function StartCodeChallengeButton(props: { matrix: string[][] }) 
     const [,navigate] = useLocation();
 
     const onClickButton = () => {
-        mazeState.setMaze(matrix)
+        micromouseState.setMaze(matrix)
         navigate(Paths.MICROMOUSE_CODERUNNER)
     }
 

@@ -3,5 +3,5 @@ export interface MicromouseGameState {
     movements: number
     isWinner: boolean
     code: string
-    matrix: string[][]
+    // matrix: string[][]
 }

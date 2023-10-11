@@ -1,92 +1,37 @@
 import { useEffect, useState } from "react";
-import ScoreDashboard from "./ScoreDashboard";
 import ConfettiExplosion from 'react-confetti-explosion';
-import Maze from "../../../../micromouse/infrastructure/ui/components/maze/Maze";
-import { createCodeRunnerWorker } from "../../../application/createCodeRunnerWorker";
-import { StartMicromouseMessage, MicromouseMoveMessage } from "../../../domain/CodeRunnerMessage";
-import useObservableValue from "../../../../ui/hooks/useObservableValue";
-import getGameConfiguration from "../../../application/getGameConfiguration";
-import Modal from "../../../../ui/components/Modal";
-import GameOverModalContent from "./GameOverModalContent";
-import WinnerModalContent from "./WinnerModalContent";
 import { useLocation } from "wouter";
-import { Paths } from "../../../../ui/router/utils/paths";
 import { micromouseGame } from "../../../../micromouse/infrastructure/services";
-import { map } from "rxjs";
+import Maze from "../../../../micromouse/infrastructure/ui/components/maze/Maze";
+import Modal from "../../../../ui/components/Modal";
+import useObservableValue from "../../../../ui/hooks/useObservableValue";
+import { Paths } from "../../../../ui/router/utils/paths";
+import executeCodeRunnerWorker from "../../../application/executeCodeRunnerWorker";
+import GameOverModalContent from "./GameOverModalContent";
+import ScoreDashboard from "./ScoreDashboard";
+import WinnerModalContent from "./WinnerModalContent";
 
-export interface MicromouseMessage {
-    matrix: string[][];
-    code: string;
-}
 
-const configuration = getGameConfiguration()
-
-export default function SandBox({ message }: { message: MicromouseMessage }) {
+export default function SandBox() {
 
     const [time] = useObservableValue(micromouseGame.time(), "00:00:00")
     const [movements] = useObservableValue(micromouseGame.movements(), 0)
     const [gameOver] = useObservableValue(micromouseGame.gameOver(), { isWinner: false })
-    const [,navigate] = useLocation();
-
+    const [, navigate] = useLocation();
     const [open, setOpen] = useState(false)
 
     useEffect(() => {
 
-        if (message) {
-
-            const worker = createCodeRunnerWorker()
-
-            micromouseGame.start({
-                maze: message.matrix,
-                stopGameAt: configuration.gameTimeout
-            })
-            
-            micromouseGame.onGameOver(() => {
-                worker.terminate()
-                setOpen(true)
-            })
-
-            worker.sendMessage(new StartMicromouseMessage(message))
-
-            worker
-                .onMessage<MicromouseMoveMessage>("MICROMOUSE_MOVE")
-                .pipe(map(event => event.payload.micromouseEvent))
-                .subscribe({
-                next: (micromouseEvent) => {
-                    micromouseGame.updateScore({
-                        message: micromouseEvent.data.message,
-                        position: micromouseEvent.data.position
-                    })
-                },
-                error: (err) => console.log(err)
-            })
-
-            worker.onMessage<MicromouseMoveMessage>("MICROMOUSE_WIN").subscribe({
-                next: () => {
-                    micromouseGame.win()
-                },
-                error: (err) => console.log(err)
-            })
-
-            return () => {
-                worker.terminate()
-            }
+        const worker = executeCodeRunnerWorker({ onGameOver: () => setOpen(true) })
+        return () =>{ 
+            worker.terminate()
         }
 
-    }, [message])
+    }, [])
 
-    const onGameOver = () => {
+    const handleAcceptModal = () => {
         setOpen(false)
         navigate(Paths.MICROMOUSE_CODERUNNER)
-    }
-
-
-    if (!message) {
-        return (
-            <div className="flex justify-center items-center h-screen">
-                <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-blue-500"></div>
-            </div>
-        )
     }
 
     return (
@@ -94,10 +39,10 @@ export default function SandBox({ message }: { message: MicromouseMessage }) {
             <div className="flex flex-col items-center">
                 <ScoreDashboard time={time} movements={movements} />
                 <Maze />
-                <Modal title={ gameOver.isWinner? "Felicitaciones" : "Que penita"} open={open} onAccept={onGameOver} onClose={onGameOver}>
-                   { gameOver.isWinner?  <WinnerModalContent movements={movements} time={time}/> : <GameOverModalContent /> }
+                <Modal title={gameOver.isWinner ? "Felicitaciones" : "Que penita"} open={open} onAccept={handleAcceptModal} onClose={handleAcceptModal}>
+                    {gameOver.isWinner ? <WinnerModalContent movements={movements} time={time} /> : <GameOverModalContent />}
                 </Modal>
-                { gameOver.isWinner ? <ConfettiExplosion zIndex={1000} />: null }
+                {gameOver.isWinner ? <ConfettiExplosion zIndex={1000} /> : null}
             </div>
         </div>
     )

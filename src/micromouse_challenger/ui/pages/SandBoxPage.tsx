@@ -8,7 +8,6 @@ import { micromouseGame } from "../../micromouse/infrastructure/services";
 export default function SandBoxPage() {
 
     const [, navigate] = useLocation();
-    const gameSetup = micromouseGame.getSetup()
 
     const handleOnStop = () => {
         micromouseGame.finish()
@@ -22,7 +21,7 @@ export default function SandBoxPage() {
             </p>
             <div className='flex place-content-center gap-6'>
                 <div className="flex justify-center items-center gap-6">
-                    <SandBox message={gameSetup} />
+                    <SandBox />
                 </div>
                 <div className="flex flex-col justify-center items-center gap-6 my-8">
                     <PrimaryButton text="DETENER" onClick={handleOnStop} className="w-40" />

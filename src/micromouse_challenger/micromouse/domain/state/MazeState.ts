@@ -9,9 +9,9 @@ export interface State {
 export class MazeState {
 
     private defaultState: State 
-    private message: Subject<string>
-    private maze: Subject<string[][]>
-    private mousePosition: Subject<string>
+    private message: BehaviorSubject<string>
+    private maze: BehaviorSubject<string[][]>
+    private mousePosition: BehaviorSubject<string>
 
     constructor(props: State) {
         this.defaultState = props
@@ -40,6 +40,10 @@ export class MazeState {
         return this.maze.pipe(distinctUntilChanged())
     }
 
+    getMaze() {
+        return this.maze.value
+    }
+
     onMousePosition() {
         return this.mousePosition.pipe(distinctUntilChanged())
     }
@@ -47,6 +51,10 @@ export class MazeState {
     reset() {
         this.maze.next(this.defaultState.maze)
         this.message.next(this.defaultState.message)
+        this.mousePosition.next(this.defaultState.mousePosition)
+    }
+
+    resetPosition() {
         this.mousePosition.next(this.defaultState.mousePosition)
     }
 

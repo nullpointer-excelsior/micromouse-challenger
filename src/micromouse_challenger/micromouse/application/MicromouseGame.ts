@@ -5,28 +5,41 @@ import { MicromouseGameState } from "../domain/state/MicromouseGameState";
 import { GameOverResponse, SetupGame } from "../dto";
 import { MazeState } from "../domain/state/MazeState";
 
+export type MicromouseGameOptions = {
+    stopwatch: Stopwatch,
+    gameTime: `${number}:${number}`,
+    gameState: ReactiveState<MicromouseGameState>,
+    mazeState: MazeState
+}
+
 export class MicromouseGame {
 
-    constructor(
-        private stopwatch: Stopwatch, 
-        private gameState$: ReactiveState<MicromouseGameState>,
-        private mazeState$: MazeState
-    ) { }
+    private stopwatch: Stopwatch
+    private gameTime: `${number}:${number}`
+    private gameState$: ReactiveState<MicromouseGameState>
+    private mazeState$: MazeState
 
-    start(params: { maze: string[][], stopGameAt: `${number}:${number}`}) {
-        this.gameState$.reset()
+    constructor(options: MicromouseGameOptions) {
+        this.stopwatch = options.stopwatch
+        this.gameTime = options.gameTime
+        this.gameState$ = options.gameState
+        this.mazeState$ = options.mazeState
+    }
+
+    start() {
         this.stopwatch.start()
-        this.mazeState$.setMaze(params.maze)
-        this.stopGameAt(params.stopGameAt)
+        this.stopGameAt(this.gameTime)
     }
 
     finish() {
         this.stopwatch.stop()
+        this.mazeState$.resetPosition()
     }
 
     reset() {
         this.gameState$.reset()
         this.stopwatch.stop()
+        this.mazeState$.reset()
     }
 
     time() {
@@ -43,13 +56,14 @@ export class MicromouseGame {
                     time: time,
                     isWinner: false
                 })
+                this.mazeState$.resetPosition()
             })
 
     }
 
     onGameOver(callback: () => void) {
         this.stopwatch.onStop().subscribe({
-            next:() => {
+            next: () => {
                 callback()
             },
             error: err => console.log(err)
@@ -64,7 +78,7 @@ export class MicromouseGame {
         )
     }
 
-    updateScore(params: { message: string, position: string}) {
+    updateScore(params: { message: string, position: string }) {
         this.mazeState$.updateMousePosition(params.position)
         this.mazeState$.updateMessage(params.message)
         this.gameState$.reduce(state => ({
@@ -77,24 +91,18 @@ export class MicromouseGame {
         return this.gameState$.listenTo(state => state.movements)
     }
 
-    setup(params: SetupGame) {
+    setup(code: string) {
         this.gameState$.reduce(state => ({
             ...state,
-            ...params
+            code
         }))
     }
 
     getSetup(): SetupGame {
         return {
             code: this.gameState$.snapshot().code,
-            matrix: this.gameState$.snapshot().matrix
+            matrix: this.mazeState$.getMaze()
         }
-    }
-
-    getSetup$(): Observable<SetupGame> {
-        return this.gameState$.listen().pipe(
-            map(state => ({ code: state.code, matrix: state.matrix }))
-        )
     }
 
     win() {

@@ -1,23 +1,19 @@
-import PrimaryButton from '../components/PrimaryButton';
+import { useLocation } from 'wouter';
+import executeMicromouseGame from '../../code-runner/application/executeMicromouseGame';
 import CodeEditor from '../../code-runner/infrastructure/ui/components/CodeEditor';
 import BackHomeButton from '../components/BackHomeButton';
-import { createMicromouseCode } from '../../code-runner/application/createMicromouseCode';
-import { useLocation } from 'wouter';
+import PrimaryButton from '../components/PrimaryButton';
 import { Paths } from '../router/utils/paths';
-import { mazeState, micromouseGame } from '../../micromouse/infrastructure/services';
 import { useCodeRunnerPageState } from '../state/code-runner-page.state';
-import useObservableValue from '../hooks/useObservableValue';
 
 
 export default function CodeRunnerPage() {
 
   const {code, setCode} = useCodeRunnerPageState()
   const [,navigate] = useLocation();
-  const [maze] = useObservableValue(mazeState.onMaze(), [[]])
 
   const onExecuteMicromouse = () => {
-    const micromouseCode = createMicromouseCode(code)
-    micromouseGame.setup({ code: micromouseCode, matrix: maze })
+    executeMicromouseGame(code)
     navigate(Paths.MICROMOUSE_SANDBOX)
   }
 

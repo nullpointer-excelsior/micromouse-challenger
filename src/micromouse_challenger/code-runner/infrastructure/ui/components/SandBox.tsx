@@ -14,16 +14,17 @@ import WinnerModalContent from "./WinnerModalContent";
 
 export default function SandBox() {
 
+    const [, navigate] = useLocation();
+    const [open, setOpen] = useState(false)
+
     const [time] = useObservableValue(micromouseGame.time(), "00:00:00")
     const [movements] = useObservableValue(micromouseGame.movements(), 0)
     const [gameOver] = useObservableValue(micromouseGame.gameOver(), { isWinner: false })
-    const [, navigate] = useLocation();
-    const [open, setOpen] = useState(false)
 
     useEffect(() => {
 
         const worker = executeCodeRunnerWorker({ onGameOver: () => setOpen(true) })
-        return () =>{ 
+        return () => { 
             worker.terminate()
         }
 

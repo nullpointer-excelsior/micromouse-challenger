@@ -1,6 +1,6 @@
 # MicroMouse Challenger
 
-Competencia virtual de micromice. este proyecto pretende crear una competencia para resolver un laberinto dond eun ratocito lo recorrera en base al algoritmo dado por los participantes. este algoritmo considerara cual es la mejor ruta y que acciones debera realñizar para optimizar los tiempos de recorrido
+Competencia virtual de micromice. este proyecto pretende crear una competencia para resolver un laberinto dond eun ratocito lo recorrera en base al algoritmo dado por los participantes. este algoritmo considerara cual es la mejor ruta y que acciones debera realizar para optimizar los tiempos de recorrido
 
 
 ## test
@@ -37,7 +37,7 @@ npm run dev
 - [x] ejecutar codigo de desafio en service worker
 - [x] despliegue aplicacion
 - [x] tiempo limite de juego
-- [ ] manejar errores en micrompuse code y worker
+- [ ] manejar errores en micromouse code y worker
 - [x] notifications and modal
 - [x] variables de ambiente para diferenciar prod de dev
 - [x] save code in localstorage

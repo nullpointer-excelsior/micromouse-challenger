@@ -54,7 +54,6 @@ export default function Modal(props: ModalProps) {
                     </div>
                 </div>
             </div>}
-            {/* <PrimaryButton text="MODAL" onClick={() => setOpen(true)} /> */}
         </>
     )
 }

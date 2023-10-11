@@ -1,4 +1,4 @@
-import { map } from "rxjs"
+import { Observable, map } from "rxjs"
 import { micromouseGame } from "../../micromouse/infrastructure/services"
 import { MicromouseMoveMessage, StartMicromouseMessage } from "../domain/CodeRunnerMessage"
 import { createCodeRunnerWorker } from "./createCodeRunnerWorker"
@@ -9,7 +9,7 @@ export type ExecuteCodeRunnerWorkerOptions = {
 }
 
 export default function executeCodeRunnerWorker(options: ExecuteCodeRunnerWorkerOptions) {
-    
+
     const worker = createCodeRunnerWorker()
 
     micromouseGame.start()
